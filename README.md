@@ -10,6 +10,7 @@
 | GET | /profile | Retrieve all the user's profile data |
 | GET | /profile-edit/{{id}} | Retrieve user |
 | POST | /profile-edit/{{id}} | Set new changes in user |
+| GET | /{{user.username}} | Retrieve another user profile |
 | GET | /events | Retrieve all the events |
 | GET | /event-{{id}} | Retrieves the info of the event |
 | GET | /artist-profile | Retrieves the artist's info: albums, etc. |
