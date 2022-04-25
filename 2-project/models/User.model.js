@@ -1,20 +1,33 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require("mongoose")
 
-// TODO: Please make sure you edit the user model to whatever makes sense in this case
 const userSchema = new Schema(
   {
-    username: {
-      type: String,
-      // unique: true -> Ideally, should be unique, but its up to you
-    },
-    password: String,
+    username: { type: String, unique: true, required: true },
+    password: { type: String, required: true },
+    email: { type: String, unique: true, required: true },
+    name: String,
+    lastname: String,
+    favoriteGenres: [String],
+    city: String,
+    image: { type: String, default: 'https://www.tech101.in/wp-content/uploads/2018/07/blank-profile-picture.png' },
+    role: { type: String, enum: ['USER', 'ARTIST', 'ADMIN'], default: 'USER', required: true },
+    friends: [{
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }],
+    savedEvents: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Event'
+    }],
+    events: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Event'
+    }]
   },
   {
-    // this second object adds extra properties: `createdAt` and `updatedAt`
     timestamps: true,
   }
-);
+)
 
-const User = model("User", userSchema);
 
-module.exports = User;
+module.exports = model("User", userSchema)

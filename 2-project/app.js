@@ -1,34 +1,37 @@
-// ℹ️ Gets access to environment variables/settings
-// https://www.npmjs.com/package/dotenv
-require("dotenv/config");
+require("dotenv/config")
+require("./db")
 
-// ℹ️ Connects to the database
-require("./db");
+const express = require("express")
+const hbs = require("hbs")
+const SpotifyWebApi = require('spotify-web-api-node')
+const app = express()
+require("./config")(app)
 
-// Handles http requests (express is node js framework)
-// https://www.npmjs.com/package/express
-const express = require("express");
+const capitalized = require("./utils/capitalized")
+const projectName = "JESÚS + CLARA"
 
-// Handles the handlebars
-// https://www.npmjs.com/package/hbs
-const hbs = require("hbs");
+app.locals.appTitle = `PROJECT 2`
 
-const app = express();
 
-// ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
-require("./config")(app);
 
-// default value for title local
-const capitalized = require("./utils/capitalized");
-const projectName = "2-project";
+// // Setting the spotify-api goes here:
+// const spotifyApi = new SpotifyWebApi({
+//     clientId: process.env.CLIENT_ID,
+//     clientSecret: process.env.CLIENT_SECRET
+// })
 
-app.locals.appTitle = `${capitalized(projectName)} created with IronLauncher`;
+// // Retrieve an access token
+// spotifyApi
+//     .clientCredentialsGrant()
+//     .then(data => spotifyApi.setAccessToken(data.body['access_token']))
+//     .catch(error => console.log('Something went wrong when retrieving an access token', error))
 
-// 👇 Start handling routes here
-const index = require("./routes/index.routes");
-app.use("/", index);
 
-// ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
-require("./error-handling")(app);
+require('./config/session.config')(app)
 
-module.exports = app;
+const index = require("./routes/index.routes")
+app.use("/", index)
+
+require("./error-handling")(app)
+
+module.exports = app

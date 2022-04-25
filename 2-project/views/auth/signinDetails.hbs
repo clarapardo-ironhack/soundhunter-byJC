@@ -1,0 +1,83 @@
+<div class="container">
+    <h3 class="mt-4 mb-5">Complete your profile</h3>
+
+    {{#if errorMessage}}
+    <div id="errorMessage">
+        <p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-exclamation-diamond" viewBox="0 0 16 16">
+                <path
+                    d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.482 1.482 0 0 1 0-2.098L6.95.435zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134z" />
+                <path
+                    d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+            </svg> {{errorMessage}}</p>
+    </div>
+    {{/if}}
+
+    <form action="/signin" method="POST" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-3">
+                        <figure>
+                            <img src="/images/null-profileImg.png" alt="null-profileImg">
+                            <label for="cover" class="form-label"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                    height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                                </svg></label>
+                        </figure>
+                    </div>
+                    <div class="col-md-9 mb-3">
+                        <h1>{{username}}</h1>
+                        <input type="hidden" class="form-control" id="username" name="username" value="{{username}}">
+                        <h6>{{email}}</h6>
+                        <div class="mb-3">
+                            <input type="hidden" class="form-control" id="username" name="email" value="{{email}}">
+                        </div>
+                        <div class="mb-3">
+                            <input type="hidden" class="form-control" id="pwd" name="plainPwd" value="{{plainPwd}}">
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="mb-3 col-md-6">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{name}}">
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <label for="lastname" class="form-label">Last name</label>
+                        <input type="text" class="form-control" id="lastname" name="lastname" value="{{lastname}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="location" class="form-label">City</label>
+                        <input type="text" class="form-control" id="location" name="location" value="{{location}}">
+                    </div>
+                    <div class="mb-3">
+                        {{!-- <label for="cover" class="form-label"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                            </svg></label> --}}
+                        <input class="form-control" type="file" id="cover" name="profileImg" style="display: none">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="favoriteGenres" class="form-label">Favorite genres</label>
+                    <select class="form-select" name="favoriteGenres" id="favoriteGenres" multiple>
+
+                        {{#each genres}}
+                        <option value="{{this}}">{{this}}</option>
+                        {{/each}}
+
+                    </select>
+
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+    </form>
+
+</div>
