@@ -51,48 +51,115 @@ router.post("/login", (req, res, next) => {
 
 
 // ----------> SIGN IN <----------
-// router.get("/signin", (req, res) => res.render('/auth/signin'))
-
-// router.get('/complete-signin', (req, res, next) => {
-// })
-
-router.post("/complete-signin", (req, res, next) => {
-    const { username, email, plainPwd } = req.body
-
-    spotifyApi
-        .getAvailableGenreSeeds()
-        .then(({ body: { genres } }) => {
-            res.render('auth/signinDetails', { username, email, plainPwd, genres })
-        })
-        .catch(err => next(err))
+// ------ 1. USER
+router.get('/signin-user', (req, res) => {
+    res.render('auth/signinUser')
 })
 
-router.post("/signin", fileUploader.single('profileImg'), (req, res, next) => {
-    const { username, email, plainPwd, name, lastname, location, favoriteGenres } = req.body
-    const { path } = req.file
+router.post('/signin-user', fileUploader.single('image'), (req, res, next) => {
+    const { username, email, plainPwd, name, lastname, city } = req.body
+    // const { path } = req.file
+    let urlImage = ''
 
-    if (name.length === 0 || lastname.length === 0 || location.length === 0 || favoriteGenres.length === 0) {
+    if (req.file === undefined) {
+        urlImage = 'https://www.tech101.in/wp-content/uploads/2018/07/blank-profile-picture.png'
+    } else {
+        const { path } = req.file
+        urlImage = path
+    }
 
-        spotifyApi
-            .getAvailableGenreSeeds()
-            .then(({ body: { genres } }) => {
-                res.render('auth/signinDetails', { username, email, name, lastname, location, plainPwd, genres, errorMessage: 'Please complete all the fields' })
-            })
-            .catch(err => next(err))
-        
+    if (username === undefined || email === undefined || plainPwd === undefined || name === undefined || lastname === undefined || city === undefined) {
+
+        res.render('auth/signinUser', { username, email, name, lastname, city, plainPwd, errorMessage: 'Please complete all the fields' })
+
     } else {
 
         bcrypt
             .genSalt(saltRounds)
             .then(salt => bcrypt.hash(plainPwd, salt))
-            .then(hashedPassword => User.create({ ...req.body, profileImg: path, password: hashedPassword }))
+            .then(hashedPassword => User.create({ ...req.body, image: urlImage, password: hashedPassword }))
             .then(createdUser => {
                 req.session.currentUser = createdUser
-                res.redirect('/')
+                res.redirect('/')    //// ESTO TIENE QUE REDIRIGIR PARA PONER TUS GUSTOS MUSICALES ETC.
             })
             .catch(err => next(err))
     }
 })
+
+
+// ------ 2. ARTIST
+router.get('/signin-artist', (req, res) => {
+    res.render('auth/signinArtist')
+})
+
+router.post('/signin-artist', (req, res, next) => {
+    const { name } = req.body
+
+    spotifyApi
+        .searchArtists(`${name}`)
+        .then(function (data) {
+            if (data.body.artists.items.length === 0) {
+                res.render('auth/signinArtist', { errorMessage: 'not an artist' })
+            } else {
+                res.render('auth/signinArtist2', { name })
+            }
+        })
+        .catch(err => next(err))
+})
+
+router.post('/signin-artist_', (req, res, next) => {
+    const { name, email, plainPwd, role } = req.body
+
+    bcrypt
+        .genSalt(saltRounds)
+        .then(salt => bcrypt.hash(plainPwd, salt))
+        .then(hashedPassword => User.create({ name, email, role, password: hashedPassword }))
+        .then(createdUser => {
+            req.session.currentUser = createdUser
+            res.redirect('/')
+        })
+        .catch(err => next(err))
+})
+
+
+
+// router.post("/complete-signin", (req, res, next) => {
+//     const { username, email, plainPwd } = req.body
+
+//     spotifyApi
+//         .getAvailableGenreSeeds()
+//         .then(({ body: { genres } }) => {
+//             res.render('auth/signinDetails', { username, email, plainPwd, genres })
+//         })
+//         .catch(err => next(err))
+// })
+
+// router.post("/signin", fileUploader.single('profileImg'), (req, res, next) => {
+//     const { username, email, plainPwd, name, lastname, location, favoriteGenres } = req.body
+//     const { path } = req.file
+
+//     if (name.length === 0 || lastname.length === 0 || location.length === 0 || favoriteGenres.length === 0) {
+
+//         spotifyApi
+//             .getAvailableGenreSeeds()
+//             .then(({ body: { genres } }) => {
+//                 res.render('auth/signinDetails', { username, email, name, lastname, location, plainPwd, genres, errorMessage: 'Please complete all the fields' })
+//             })
+//             .catch(err => next(err))
+
+//     } else {
+
+//         bcrypt
+//             .genSalt(saltRounds)
+//             .then(salt => bcrypt.hash(plainPwd, salt))
+//             .then(hashedPassword => User.create({ ...req.body, profileImg: path, password: hashedPassword }))
+//             .then(createdUser => {
+//                 req.session.currentUser = createdUser
+//                 res.redirect('/')
+//             })
+//             .catch(err => next(err))
+//     }
+// })
 
 
 

@@ -89,21 +89,11 @@
          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
-         <form action="/complete-signin" method="POST">
-            <div class="mb-3">
-               <label for="username" class="form-label">Username</label>
-               <input type="text" class="form-control" id="username" name="username">
-            </div>
-            <div class="mb-3">
-               <label for="email" class="form-label">Email</label>
-               <input type="email" class="form-control" id="email" name="email">
-            </div>
-            <div class="mb-3">
-               <label for="pwd" class="form-label">Password</label>
-               <input type="password" class="form-control" id="pwd" name="plainPwd">
-            </div>
-            <button type="submit" class="btn btn-primary">SIGN IN</button>
-         </form>
+         <h5>Have access to soundhunter</h5>
+         <h6>First, tell us what you are.</h6>
+         <a href="/signin-user"><button class="artist-user-btn">USER</button></a>
+         <a href="/signin-artist"><button class="artist-user-btn">ARTIST</button></a>
+
       </div>
    </div>
 
