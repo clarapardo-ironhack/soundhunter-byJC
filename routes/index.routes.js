@@ -9,6 +9,7 @@ router.get("/", (req, res, next) => {
 
 // AUTH ROUTES: log in - sign in - log out
 router.use("/", require('./auth.routes'))
+router.use("/", require('./user.routes'))
 
 
 module.exports = router

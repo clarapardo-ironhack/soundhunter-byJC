@@ -1,8 +1,52 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    background-color: rgb(63, 63, 63);
+}
+
 #errorMessage {
     background-color: rgb(255, 202, 202);
     text-align: center;
 }
 
-img{
+img {
     width: 100%;
+}
+
+/* NAVBAR */
+
+.navbar-img {
+    width: 20%;
+}
+
+.navbar {
+    padding: 15px 60px;
+}
+
+/* ARTIST PROFILE */
+
+.box-info {
+    width: 70%;
+    height: 600px;
+    margin: auto;
+    color: white;
+
+}
+
+hr {
+    color: #17C3B2;
+}
+
+footer {
+    background-color: #212529;
+    width: 100%;
+    color: white;
+    bottom: 0;
+    position: fixed;
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    font-size: 1.3em;
+    font-weight: 400;
+
 }
