@@ -1,0 +1,18 @@
+<div class="container">
+    <form action="/signin-user/musicGenres" method="POST">
+        <div class="row">
+            
+            <div class="col-md-6">
+                    <label for="favoriteGenres" class="form-label">Favorite genres</label>
+                    <select class="form-select" name="favoriteGenres" id="favoriteGenres" multiple>
+    
+                        {{#each genres}}
+                        <option value="{{this}}">{{this}}</option>
+                        {{/each}}
+    
+                    </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+    </form>
+</div>
