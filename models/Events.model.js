@@ -14,7 +14,8 @@ const eventSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'User'
         }],
-        image: { type: String, required: true }
+        image: { type: String, required: true },
+        comments: [Object]
     }
 )
 

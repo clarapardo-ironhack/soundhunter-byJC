@@ -1,0 +1,23 @@
+<div class="container">
+
+    <h1>Ready to share your art with the world?</h1>
+    <h3>First, let's get to know you better</h3>
+
+
+    <h2>{{name}}</h2>
+    <form action="/signin-artist_" method="post">
+        <input type="hidden" class="form-control" id="name" name="name" value="{{name}}">
+        <input type="hidden" class="form-control" id="role" name="role" value="ARTIST">
+        <div>
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email">
+        </div>
+        <div>
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="plainPwd">
+        </div>
+        <button type="submit" class="btn btn-primary">Create account</button>
+
+    </form>
+
+</div>
