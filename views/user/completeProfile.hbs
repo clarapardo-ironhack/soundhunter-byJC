@@ -1,10 +1,12 @@
-<div class="container">
-    <form action="/signin-user/musicGenres" method="POST">
+<div class="container center-all">
+    <h1 class="syncopate big-title mt-5 pt-4 center-big-title">Tell us what are your favourite genres</h1>
+
+    <form action="/signin-user/musicGenres" method="POST" class="center-all">
         <div class="row">
             
             <div class="col-md-6">
-                    <label for="favoriteGenres" class="form-label">Favorite genres</label>
-                    <select class="form-select" name="favoriteGenres" id="favoriteGenres" multiple>
+                    {{!-- <label for="favoriteGenres" class="form-label">Favorite genres</label> --}}
+                    <select class="form-select form-select-genres mt-5" name="favoriteGenres" id="favoriteGenres" multiple>
     
                         {{#each genres}}
                         <option value="{{this}}">{{this}}</option>
@@ -13,6 +15,6 @@
                     </select>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-primary user-signin-btn mt-5">Save changes</button>
     </form>
 </div>

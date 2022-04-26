@@ -1,6 +1,5 @@
-<div class="container">
-
-    <h1>Ready to share your art with the world?</h1>
+<div class="container center-all">
+    <h1 class="syncopate big-title center-big-title mt-5 pt-5 mb-4">Ready to share your art with the world?</h1>
     <h3>First, let's get to know you better</h3>
 
     {{#if errorMessage}}
@@ -19,11 +18,15 @@
     </div>
     {{/if}}
 
-    <form action="/signin-artist" method="POST">
-        <div>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Artist name">
-        </div>
-        <button type="submit" class="btn btn-primary">GO</button>
-    </form>
+    <div class="dissapear">
+        <form action="/signin-artist" method="POST" class="center-all">
+            <div>
+                <input type="text" class="form-control artist-signin-form-name mt-5" id="name" name="name" placeholder="Artist name">
+            </div>
+            <button type="submit" class="btn btn-primary mt-4 user-signin-btn">GO</button>
+        </form>
+    </div>
+
+
 
 </div>

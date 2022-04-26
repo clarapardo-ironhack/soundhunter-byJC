@@ -44,7 +44,7 @@ router.get("/artist/:id", (req, res, next) => {
 
 
 // ----------> USER: choose favorite genres <----------
-router.get("/signin-user/musicGenres", (req, res) => {
+router.get("/signin-user/musicGenres", (req, res, next) => {
 
     spotifyApi
         .getAvailableGenreSeeds()

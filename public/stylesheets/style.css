@@ -13,6 +13,10 @@ img {
     width: 100%;
 }
 
+.syncopate {
+    font-family: 'Syncopate', sans-serif;
+}
+
 /* NAVBAR */
 
 .navbar-img {
@@ -49,4 +53,98 @@ footer {
     font-size: 1.3em;
     font-weight: 400;
 
+}
+
+
+/* USER SIGN IN*/
+.big-title {
+    color: white;
+}
+
+.profilePic {
+    border-radius: 50%;
+}
+
+.form-box {
+    border: none;
+    border-radius: 0%;
+    border-bottom: 2px solid #17C3B2;
+    background-color: rgb(63, 63, 63);
+}
+
+.form-box-border {
+    border: 2px solid #17C3B2;
+    border-radius: 0%;
+    background-color: rgb(63, 63, 63);
+}
+
+.form-label-white {
+    color: white;
+}
+
+.pen-edit-picture {
+    position: relative;
+}
+
+.user-signin-btn {
+    padding: 1.3em 3em;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+
+.user-signin-btn:hover {
+    background-color: #2EE59D;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+}
+
+.user-signin-btn:active {
+    transform: translateY(-1px);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* FAVOURITE GENRES */
+.center-all {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.center-big-title {
+    width: 65%;
+    text-align: center;
+}
+
+.form-select-genres {
+    width: 500px;
+    height: 200px;
+}
+
+/* ARTIST SIGN IN*/
+.artist-signin-form-name {
+    width: 500px;
+    border: none;
+    border-radius: 0%;
+    border-bottom: 2px solid #17C3B2;
+    background-color: rgb(63, 63, 63);
+    text-align: center;
+    font-size: 2.5em;
 }

@@ -1,6 +1,5 @@
 <div class="container">
 
-    <h1>We would like to know more about you.</h1>
 
     {{#if errorMessage}}
     <div id="errorMessage">
@@ -16,30 +15,35 @@
 
     <form action="/signin-user" method="POST" enctype="multipart/form-data">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-5 mt-5">
+                <h1 class="syncopate big-title">We would like to know more about you.</h1>
+            </div>
+            <div class="col-md-7 mt-5">
                 <div class="row">
                     <div class="col-md-3">
                         <figure>
-                            <img src="/images/null-profileImg.png" alt="null-profileImg">
-                            {{!-- <label for="cover" class="form-label"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                            <img class="profilePic" src="/images/null-profileImg.png" alt="null-profileImg">
+                            <label for="cover" class="form-label pen-edit-picture"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                                     height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                                     <path
                                         d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
-                                </svg></label> --}}
+                                </svg></label>
                         </figure>
                     </div>
                     <div class="col-md-9 mb-3">
                         <div class="mt-4 mb-3">
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Username"
-                                value="{{username}}">
+                            <input type="text" class="form-control form-box" style="font-size: 2em" id="username"
+                                name="username" placeholder="Username" value="{{username}}">
                         </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" id="username" name="email" placeholder="Email"
-                                value="{{email}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="password" class="form-control" id="pwd" name="plainPwd" placeholder="Password"
-                                value="{{plainPwd}}">
+                        <div class="row">
+                            <div class="mb-3 col-md-6">
+                                <input type="text" class="form-control form-box" id="username" name="email"
+                                    placeholder="Email" value="{{email}}">
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <input type="password" class="form-control form-box" id="pwd" name="plainPwd"
+                                    placeholder="Password" value="{{plainPwd}}">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -48,44 +52,25 @@
 
                 <div class="row">
                     <div class="mb-3 col-md-6">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" value="{{name}}">
+                        <label for="name" class="form-label form-label-white">Name</label>
+                        <input type="text" class="form-control form-box-border" id="name" name="name" value="{{name}}">
                     </div>
                     <div class="mb-3 col-md-6">
-                        <label for="lastname" class="form-label">Last name</label>
-                        <input type="text" class="form-control" id="lastname" name="lastname" value="{{lastname}}">
+                        <label for="lastname" class="form-label form-label-white">Last name</label>
+                        <input type="text" class="form-control form-box-border" id="lastname" name="lastname"
+                            value="{{lastname}}">
                     </div>
                     <div class="mb-3">
-                        <label for="city" class="form-label">City</label>
-                        <input type="text" class="form-control" id="city" name="city" value="{{location}}">
+                        <label for="city" class="form-label form-label-white">City</label>
+                        <input type="text" class="form-control form-box-border" id="city" name="city"
+                            value="{{location}}">
                     </div>
                     <div class="mb-3">
-                        <label for="cover" class="form-label"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                                <path
-                                    d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
-                            </svg></label>
                         <input class="form-control" type="file" id="cover" name="image" style="display: none">
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sodales, nisl ac pellentesque
-                    tincidunt, ligula
-                    purus laoreet metus, sit amet pulvinar diam odio ut ante. Suspendisse finibus est et arcu
-                    vestibulum, eget cursus sapien
-                    malesuada. In laoreet mollis commodo. Vestibulum eleifend convallis erat a sagittis. Vestibulum ante
-                    ipsum primis in
-                    faucibus orci luctus et ultrices posuere cubilia curae; Fusce interdum tellus ac tellus aliquam
-                    tincidunt. Donec porta
-                    nulla eget odio eleifend, eget euismod justo laoreet. Nunc vel quam orci. Curabitur nisi tellus,
-                    malesuada at ipsum
-                    mollis, fringilla placerat urna. Morbi a mi vehicula mauris lobortis bibendum vitae at nisi.
-                    Curabitur dapibus erat ac
-                    enim elementum, ac molestie ipsum placerat. Sed aliquam nulla magna, nec posuere elit aliquet id.
-                </h6>
+                <button type="submit" class="btn btn-primary user-signin-btn">Create account</button>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Create account</button>
     </form>
 </div>

@@ -22,8 +22,8 @@
                 purus laoreet metus, sit amet pulvinar diam odio ut ante. Suspendisse finibus est et arcu
                 vestibulum, eget cursus sapien
                 malesuada. In laoreet mollis commodo. Vestibulum eleifend convallis erat a sagittis. Vestibulum ante
-                ipsum primis in
-                faucibus orci luctus et ultrices posuere cubilia curae; Fusce interdum tellus ac tellus aliquam
+                ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce interdum tellus ac tellus
+                aliquam
                 tincidunt. Donec porta
                 nulla eget odio eleifend, eget euismod justo laoreet. Nunc vel quam orci. Curabitur nisi tellus,
                 malesuada at ipsum
@@ -35,24 +35,46 @@
         <div class="col-md-8">
             <form action="/event/add-new" method="POST">
                 <div>
-                    <label for="name" class="form-label">Events name</label>
-                    <input type="text" class="form-control" id="name" name="name" value="{{name}}">
+                    {{!-- <label for="name" class="form-label">Events name</label> --}}
+                    <input type="text" class="form-control form-box" style="font-size: 2em" id="name"
+                        placeholder="Event's name" name="name" value="{{name}}">
                 </div>
                 <div>
-                    <label for="date" class="form-label">Date</label>
-                    <input type="text" class="form-control" id="date" name="date" value="{{date}}">
+                    <label for="artists" class="form-label">Collaborating artists</label>
+                    <select class="form-select" name="artists" id="artists" multiple>
+
+                        {{#each allArtists}}
+                        <option value="{{id}}">{{name}}</option>
+                        {{/each}}
+
+                    </select>
                 </div>
                 <div>
-                    <label for="artist" class="form-label">Artists</label>
-                    <input type="text" class="form-control" id="artist" name="artist" value="{{artist}}">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea name="description" id="description" cols="104" rows="6"
+                        value="{{description}}"></textarea>
                 </div>
-                <textarea name="description" id="" cols="30" rows="10">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div>
+                            <label for="date" class="form-label">Date</label>
+                            <input type="datetime-local" class="form-control" id="date" name="date" value="{{date}}">
+                        </div>
 
-                </textarea>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="lat" class="form-label">Location</label>
 
+                        <input type="text" class="form-control" id="lat" name="lat" placeholder="Latitude"
+                            value="{{lat}}">
+                        <input type="text" class="form-control mt-3" id="lng" name="lng" placeholder="Longitude"
+                            value="{{lng}}">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary user-signin-btn">Save changes</button>
             </form>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Save changes</button>
 
 </div>

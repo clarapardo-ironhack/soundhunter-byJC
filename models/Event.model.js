@@ -4,7 +4,7 @@ const eventSchema = new Schema(
     {
         name: { type: String, required: true },
         date: { type: Date, required: true },
-        artist: [{
+        artists: [{
             type: Schema.Types.ObjectId,
             ref: 'User'
         }],
@@ -17,7 +17,7 @@ const eventSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'User'
         }],
-        image: { type: String, required: true },
+        image: { type: String },
         comments: [Object]
     }
 )
