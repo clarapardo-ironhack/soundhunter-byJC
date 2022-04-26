@@ -58,7 +58,6 @@ router.get('/signin-user', (req, res) => {
 
 router.post('/signin-user', fileUploader.single('image'), (req, res, next) => {
     const { username, email, plainPwd, name, lastname, city } = req.body
-    // const { path } = req.file
     let urlImage = ''
 
     if (req.file === undefined) {
@@ -80,7 +79,7 @@ router.post('/signin-user', fileUploader.single('image'), (req, res, next) => {
             .then(hashedPassword => User.create({ ...req.body, image: urlImage, password: hashedPassword }))
             .then(createdUser => {
                 req.session.currentUser = createdUser
-                res.redirect('/')    //// ESTO TIENE QUE REDIRIGIR PARA PONER TUS GUSTOS MUSICALES ETC.
+                res.redirect('/signin-user/musicGenres')
             })
             .catch(err => next(err))
     }

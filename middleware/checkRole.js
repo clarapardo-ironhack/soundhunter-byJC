@@ -1,13 +1,13 @@
 
 const isLoggedIn = (req, res, next) => {
-    req.user ? next() : res.render('auth/login', { errorMessage: 'Inicia sesión para acceder' })
+    req.session.currentUser ? next() : res.render('auth/login', { errorMessage: 'Login to access' })
 }
 
 const checkRole = (...rolesToCheck) => (req, res, next) => {
-    if (rolesToCheck.includes(req.user.role)) {
+    if (rolesToCheck.includes(req.session.currentUser.role)) {
         next()
     } else {
-        res.render('auth/login', { errorMessage: 'No tienes permisos' })
+        res.render('auth/login', { errorMessage: 'You do not have permissions' })
     }
 }
 

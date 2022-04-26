@@ -9,7 +9,10 @@ const eventSchema = new Schema(
             ref: 'User'
         }],
         description: { type: String, required: true },
-        location: { type: String, required: true },
+        location: {
+            type: { type: String },
+            coordinates: [Number]
+        },
         followers: [{
             type: Schema.Types.ObjectId,
             ref: 'User'
@@ -18,5 +21,7 @@ const eventSchema = new Schema(
         comments: [Object]
     }
 )
+
+eventSchema.index({ location: '2dsphere' })
 
 module.exports = model("Event", eventSchema)

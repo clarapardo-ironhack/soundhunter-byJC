@@ -40,7 +40,7 @@ router.get("/artist/:id", (req, res, next) => {
     spotifyApi
         .getArtist(id)
         .then((artist) => {
-            console.log(artist)
+            // console.log(artist)
             res.render('profile/artist-profile', { artist })
         })
         .catch(err => next(err))
@@ -49,16 +49,43 @@ router.get("/artist/:id", (req, res, next) => {
 
 router.get("/user/:id", (req, res, next) => {
 
-    const { id } = req.session.currentUser._id
-
+    const { id } = req.params
+    console.log(id)
     User
         .findById(id)
         .then(user => {
-            res.render('profile/user-profile', user)
+            console.log(user)
+            res.render('profile/user-profile', { user })
         })
         .catch(err => next(err))
 
 })
+
+
+// ----------> USER: choose favorite genres <----------
+router.get("/signin-user/musicGenres", (req, res) => {
+
+    spotifyApi
+        .getAvailableGenreSeeds()
+        .then(({ body: { genres } }) => {
+            res.render('user/completeProfile', { genres })
+        })
+        .catch(err => next(err))
+})
+
+router.post("/signin-user/musicGenres", (req, res, next) => {
+    const { favoriteGenres } = req.body
+    const id = req.session.currentUser._id
+
+    User
+        .findByIdAndUpdate(id, { favoriteGenres })
+        .then(res.redirect('/'))
+        .catch(err => next(err))
+})
+
+
+
+
 
 
 
