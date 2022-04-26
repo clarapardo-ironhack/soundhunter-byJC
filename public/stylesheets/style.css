@@ -27,6 +27,23 @@ img {
     padding: 15px 60px;
 }
 
+/* .dropdown-menu {
+    color: #17C3B2;
+} */
+
+.dropdown-toggle::after {
+    color: #17C3B2;
+    display: none;
+
+}
+
+.icon-user-circle-o {
+    color: #17C3B2;
+    display: block;
+    font-size: 30px;
+    padding-right: 30px;
+}
+
 /* ARTIST PROFILE */
 
 .box-info {
@@ -37,6 +54,11 @@ img {
 
 }
 
+.box-info p {
+    font-size: 1.3em;
+
+}
+
 hr {
     color: #17C3B2;
 }
@@ -44,7 +66,7 @@ hr {
 footer {
     background-color: #212529;
     width: 100%;
-    color: white;
+    color: #17C3B2;
     bottom: 0;
     position: fixed;
     height: 60px;
@@ -147,4 +169,10 @@ input:-webkit-autofill:active {
     background-color: rgb(63, 63, 63);
     text-align: center;
     font-size: 2.5em;
+}
+/* TEXT SIGN */
+
+.text-sign {
+    color: white;
+
 }
