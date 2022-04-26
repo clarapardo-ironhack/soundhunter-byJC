@@ -4,16 +4,17 @@
         <div class="col-md-6">
             <p>{{name}}</p>
             <p>{{username}}</p>
+            {{#each favoriteGenres}}
+                <p>Géneros Favoritos:</p>
+            <ul>
+                <li>{{this}}</li>
+            </ul>
+            {{/each}}
+        </div>
+        <div class="col-md-6">
+            <img class="img-profile-user" src="{{image}}" alt="">
         </div>
     </div>
     {{/each}}
 
 </div>
-
-{{!-- <div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <h1>HOLAAAA</h1>
-        </div>
-    </div>
-</div> --}}
