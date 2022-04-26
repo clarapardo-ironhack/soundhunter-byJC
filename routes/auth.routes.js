@@ -123,46 +123,6 @@ router.post('/signin-artist_', (req, res, next) => {
 
 
 
-// router.post("/complete-signin", (req, res, next) => {
-//     const { username, email, plainPwd } = req.body
-
-//     spotifyApi
-//         .getAvailableGenreSeeds()
-//         .then(({ body: { genres } }) => {
-//             res.render('auth/signinDetails', { username, email, plainPwd, genres })
-//         })
-//         .catch(err => next(err))
-// })
-
-// router.post("/signin", fileUploader.single('profileImg'), (req, res, next) => {
-//     const { username, email, plainPwd, name, lastname, location, favoriteGenres } = req.body
-//     const { path } = req.file
-
-//     if (name.length === 0 || lastname.length === 0 || location.length === 0 || favoriteGenres.length === 0) {
-
-//         spotifyApi
-//             .getAvailableGenreSeeds()
-//             .then(({ body: { genres } }) => {
-//                 res.render('auth/signinDetails', { username, email, name, lastname, location, plainPwd, genres, errorMessage: 'Please complete all the fields' })
-//             })
-//             .catch(err => next(err))
-
-//     } else {
-
-//         bcrypt
-//             .genSalt(saltRounds)
-//             .then(salt => bcrypt.hash(plainPwd, salt))
-//             .then(hashedPassword => User.create({ ...req.body, profileImg: path, password: hashedPassword }))
-//             .then(createdUser => {
-//                 req.session.currentUser = createdUser
-//                 res.redirect('/')
-//             })
-//             .catch(err => next(err))
-//     }
-// })
-
-
-
 // ----------> LOG OUT <----------
 router.post('/logout', (req, res, next) => {
     req.session.destroy(() => res.redirect('/'))

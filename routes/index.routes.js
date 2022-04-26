@@ -14,4 +14,7 @@ router.use("/", require('./user.routes'))
 // EVENTS ROUTES
 router.use("/event", require('./event.routes'))
 
+// GOOGLE MAPS API
+router.use('/apiMaps', require('./apiMaps.routes'))
+
 module.exports = router

@@ -229,3 +229,11 @@ input:-webkit-autofill:active {
     color: white;
 
 }
+
+/* EVENTS */
+.event-hero{
+    background-image: url('./../images/festival-bg.jpg');
+    height: 400px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
