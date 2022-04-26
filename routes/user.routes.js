@@ -88,6 +88,32 @@ router.post("/signin-user/musicGenres", (req, res, next) => {
 
 
 
+// ----------> USER: choose favorite genres <----------
+router.get("/signin-user/musicGenres", (req, res) => {
+
+    spotifyApi
+        .getAvailableGenreSeeds()
+        .then(({ body: { genres } }) => {
+            res.render('user/completeProfile', { genres })
+        })
+        .catch(err => next(err))
+})
+
+router.post("/signin-user/musicGenres", (req, res, next) => {
+    const { favoriteGenres } = req.body
+    const id = req.session.currentUser._id
+
+    User
+        .findByIdAndUpdate(id, { favoriteGenres })
+        .then(res.redirect('/'))
+        .catch(err => next(err))
+})
+
+
+
+
+
+
 
 
 module.exports = router
