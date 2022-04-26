@@ -100,7 +100,7 @@ router.post('/signin-artist', (req, res, next) => {
             if (data.body.artists.items.length === 0) {
                 res.render('auth/signinArtist', { errorMessage: 'not an artist' })
             } else {
-                document.querySelector('.dissapear').innerHTML('display: none')
+                // document.querySelector('.dissapear').innerHTML('display: none')
                 res.render('auth/signinArtist2', { name })
             }
         })
@@ -120,46 +120,6 @@ router.post('/signin-artist_', (req, res, next) => {
         })
         .catch(err => next(err))
 })
-
-
-
-// router.post("/complete-signin", (req, res, next) => {
-//     const { username, email, plainPwd } = req.body
-
-//     spotifyApi
-//         .getAvailableGenreSeeds()
-//         .then(({ body: { genres } }) => {
-//             res.render('auth/signinDetails', { username, email, plainPwd, genres })
-//         })
-//         .catch(err => next(err))
-// })
-
-// router.post("/signin", fileUploader.single('profileImg'), (req, res, next) => {
-//     const { username, email, plainPwd, name, lastname, location, favoriteGenres } = req.body
-//     const { path } = req.file
-
-//     if (name.length === 0 || lastname.length === 0 || location.length === 0 || favoriteGenres.length === 0) {
-
-//         spotifyApi
-//             .getAvailableGenreSeeds()
-//             .then(({ body: { genres } }) => {
-//                 res.render('auth/signinDetails', { username, email, name, lastname, location, plainPwd, genres, errorMessage: 'Please complete all the fields' })
-//             })
-//             .catch(err => next(err))
-
-//     } else {
-
-//         bcrypt
-//             .genSalt(saltRounds)
-//             .then(salt => bcrypt.hash(plainPwd, salt))
-//             .then(hashedPassword => User.create({ ...req.body, profileImg: path, password: hashedPassword }))
-//             .then(createdUser => {
-//                 req.session.currentUser = createdUser
-//                 res.redirect('/')
-//             })
-//             .catch(err => next(err))
-//     }
-// })
 
 
 

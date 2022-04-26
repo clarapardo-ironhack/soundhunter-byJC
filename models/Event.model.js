@@ -9,6 +9,12 @@ const eventSchema = new Schema(
             ref: 'User'
         }],
         description: { type: String, required: true },
+        address: {
+            street: String,
+            number: Number,
+            postcode: Number,
+            city: String
+        },
         location: {
             type: { type: String },
             coordinates: [Number]

@@ -1,8 +1,5 @@
 <div class="container">
 
-    <h1>ESTOY CREANDO UN NUEVO EVENTO</h1>
-
-
     {{#if errorMessage}}
     <div id="errorMessage">
         <p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -15,7 +12,7 @@
     </div>
     {{/if}}
 
-    <div class="row">
+    <div class="row mt-5">
         <div class="col-md-4">
             <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sodales, nisl ac pellentesque
                 tincidunt, ligula
@@ -33,46 +30,70 @@
             </h6>
         </div>
         <div class="col-md-8">
-            <form action="/event/add-new" method="POST">
+            <form action="/event/add-new" method="POST" enctype="multipart/form-data">
                 <div>
                     {{!-- <label for="name" class="form-label">Events name</label> --}}
                     <input type="text" class="form-control form-box" style="font-size: 2em" id="name"
                         placeholder="Event's name" name="name" value="{{name}}">
                 </div>
-                <div>
-                    <label for="artists" class="form-label">Collaborating artists</label>
-                    <select class="form-select" name="artists" id="artists" multiple>
+                <div class="row mt-4">
+                    <div class="col-md-4">
+                        <label for="artists" class="form-label form-label-white">Collaborating artists</label>
+                        <select class="form-select" name="artists" id="artists" multiple>
 
-                        {{#each allArtists}}
-                        <option value="{{id}}">{{name}}</option>
-                        {{/each}}
+                            {{#each allArtists}}
+                            <option value="{{id}}">{{name}}</option>
+                            {{/each}}
 
-                    </select>
+                        </select>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <label for="date" class="form-label form-label-white">Location</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control form-box" id="street" name="street"
+                                    placeholder="Street" value="{{street}}">
+                                <input type="text" class="form-control mt-3 form-box" id="number" placeholder="Number"
+                                    name="number" value="{{number}}">
+                                <input type="text" class="form-control mt-3 form-box" id="postcode"
+                                    placeholder="Postcode" name="postcode" value="{{postcode}}">
+                                <input type="text" class="form-control mt-3 form-box" id="city" placeholder="City"
+                                    name="city" value="{{city}}">
+
+
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control form-box" id="lat" name="lat"
+                                    placeholder="Latitude" value="{{lat}}">
+                                <input type="text" class="form-control mt-3 form-box" id="lng" name="lng"
+                                    placeholder="Longitude" value="{{lng}}">
+                            </div>
+                        </div>
+
+
+                    </div>
                 </div>
                 <div>
-                    <label for="description" class="form-label">Description</label>
+                    <label for="description" class="form-label form-label-white">Description</label>
                     <textarea name="description" id="description" cols="104" rows="6"
                         value="{{description}}"></textarea>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div>
-                            <label for="date" class="form-label">Date</label>
+                            <label for="date" class="form-label form-label-white">Date</label>
                             <input type="datetime-local" class="form-control" id="date" name="date" value="{{date}}">
                         </div>
-
                     </div>
                     <div class="col-md-6">
-                        <label for="lat" class="form-label">Location</label>
+                        <label for="cover" class="form-label pen-edit-picture form-label-white">Upload the cover of the event</label>
+                        <input class="form-control" type="file" id="cover" name="image">
 
-                        <input type="text" class="form-control" id="lat" name="lat" placeholder="Latitude"
-                            value="{{lat}}">
-                        <input type="text" class="form-control mt-3" id="lng" name="lng" placeholder="Longitude"
-                            value="{{lng}}">
                     </div>
+
                 </div>
 
-                <button type="submit" class="btn btn-primary user-signin-btn">Save changes</button>
+                <button type="submit" class="btn btn-primary user-signin-btn mt-5">Save changes</button>
             </form>
         </div>
     </div>
