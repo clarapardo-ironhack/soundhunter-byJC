@@ -1,15 +1,25 @@
 <div class="container box-info mt-5">
-    {{#each artist}}
     <div class="row">
 
-        <div class="col-md-7">
-            <h1>{{name}}</h1>
-        </div>
+
         <div class="col-md-5">
-            <img src="{{images.0.url}}" alt="">
+            <h1>{{body.name}}</h1>
+            <img class="img-profile-artist" src="{{body.images.0.url}}" alt="">
+            {{!-- <iframe src="{{body.external_url.spotify}}" frameborder="0"></iframe> --}}
 
         </div>
+        <div class="col-md-7">
+            {{!-- <iframe src="{{body.external_url.spotify}}" frameborder="0"></iframe> --}}
+            <div id="embed-iframe"> <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/{{id}}"
+                    width="100%" height="250" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe></div>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, pariatur.</p>
+            <a href="#"><button>create event</button></a>
+            <br>
+        </div>
+
     </div>
-    {{/each}}
-    <a href="#"><button>create event</button></a>
+
 </div>
+

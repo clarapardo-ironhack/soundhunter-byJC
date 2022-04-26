@@ -100,7 +100,7 @@ router.post('/signin-artist', (req, res, next) => {
             if (data.body.artists.items.length === 0) {
                 res.render('auth/signinArtist', { errorMessage: 'not an artist' })
             } else {
-                document.querySelector('.dissapear').innerHTML('display: none')
+                // document.querySelector('.dissapear').innerHTML('display: none')
                 res.render('auth/signinArtist2', { name })
             }
         })

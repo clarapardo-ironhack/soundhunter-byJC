@@ -17,15 +17,26 @@
 | --- | --- | --- |
 | GET | / | Index |
 | GET | /artist/:id | Renders the artist's data |
+| GET | /artist/:id/edit | Edit artists' data |
+| POST | /artist/:id/edit | Edit the artist's data |
+| POST | /artist/:id/delete | Delete the artist's data |
 
 
-## 'NOT YET DONE' ROUTES
+## USER ROUTES
 | METHOD | URL | DESCRIPTION |
 | --- | --- | --- |
-| GET | /profile | Retrieve all the user's profile data |
-| GET | /profile-edit/{{id}} | Retrieve user |
-| POST | /profile-edit/{{id}} | Set new changes in user |
-| GET | /{{user.username}} | Retrieve another user profile |
-| GET | /events | Retrieve all the events |
-| GET | /event-{{id}} | Retrieves the info of the event |
-| GET | /artist-profile | Retrieves the artist's info: albums, etc. |
+| GET | /user/:id | Renders the user's data |
+| GET | /user/:id/edit | Edit user's data |
+| POST | /user/:id/edit | Edit the user's data |
+| POST | /user/:id/delete | Delete the user's data |
+
+
+
+## EVENTS ROUTES
+| METHOD | URL | DESCRIPTION |
+| --- | --- | --- |
+| GET | /event/add-new | |
+| POST | /event/add-new | |
+| GET | /event/:id | |
+
+
