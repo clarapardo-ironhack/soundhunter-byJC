@@ -6,13 +6,14 @@
 </style>
 
 <div class="center-all event-hero">
-    {{!-- AQUI HAY QUE PONER LA FOTO DE BACKGROUND-IMG --}}
     <h2 class="syncopate big-title center-big-title mt-5 pt-5 mb-4" style="font-size: 4em">{{selectedEvent.name}}</h2>
-    <button>JOIN</button>
+    <a href="/event/{{selectedEvent._id}}/join"><button>JOIN</button></a>
 </div>
 
-<div class="row center-all mt-5">
+<div class="row center-all mt-5" style="color: white">
     <div class="col-md-9">
+
+
         <h5>Description</h5>
         <hr>
         <div class="row">
@@ -34,9 +35,15 @@
                         </svg> {{fullDate}}</h6>
                 </div>
                 <div>
-                    <h6 class="mt-5"><strong>Pleople joined</strong></h6>
+                    <h6 class="mt-5"><strong>People joined</strong></h6>
                     <h6>{{selectedEvent.followers.length}}</h6>
+                    <div>
 
+                        {{#each selectedEvent.followers}}
+                        <img class="round-followers" src="{{image}}" alt="profile-pic">
+                        {{/each}}
+
+                    </div>
                 </div>
             </div>
             <div class="col-md-5">
@@ -44,14 +51,31 @@
             </div>
         </div>
 
+
         <h5 class="mt-4">Collaborating artist</h5>
         <hr>
-        <div style="background-color: red; height: 200px"></div>
+        <div class="scrolling-wrapper" style="background-color: black; height: 200px">
+
+            {{#each selectedEvent.artists}}
+            <div class="card artist-card center-all" style="width: 12rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{name}}</h5>
+
+                    <a href="#" class="btn btn-dark">See more</a>
+                </div>
+            </div>
+            {{/each}}
+
+        </div>
+
 
         <h5 class="mt-4">Location</h5>
         <hr>
-
         <div class="row">
+            <div class="col-md-8">
+                <figure id="eventMap"></figure>
+            </div>
             <div class="col-md-4">
                 <h6><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
@@ -61,23 +85,43 @@
                 <h6>{{selectedEvent.address.street}}, {{selectedEvent.address.number}} </h6>
                 <h6>{{selectedEvent.address.city}}</h6>
                 <h6>{{selectedEvent.address.postcode}}</h6>
-                {{!-- RESERVA TU ALOJAMIENTO PARA EL EVENTO --}}
-            </div>
-            <div class="col-md-8">
+                <h6 style="display: none" class="latitude">{{selectedEvent.location.coordinates.[0]}}</h6>
+                <h6 style="display: none" class="longitude">{{selectedEvent.location.coordinates.[1]}}</h6>
 
-                <figure id="eventMap"></figure>
+                {{!-- RESERVA TU ALOJAMIENTO PARA EL EVENTO --}}
             </div>
         </div>
 
 
-        <h5 class="mt-4">Comments</h5>
+        <h5 class="mt-4">People is talking about it</h5>
+        <hr>
+        <h6>Leave your comment!</h6>
+        <div class="row">
+            <div class="col-md-4">
+                <form action="{{selectedEvent.id}}/add-comment" method="POST">
+                    <div>
+                        <textarea name="comment" id="comment" cols="40" rows="6"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary user-signin-btn mt-4">Go!</button>
+                </form>
+            </div>
+
+            <div class="col-md-8" style="background-color: black">
+
+                {{#each selectedEvent.comments}}
+                <h6>{{user}}</h6>
+                <h6>{{comment}}</h6>
+                <hr>
+                {{/each}}
+
+            </div>
+        </div>
 
     </div>
 </div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
 <script src="/js/event-map-setup.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>
-{{!-- key=AIzaSyBb6r264RJFqhWcbSlzuMatum_MO3A6BoY& --}}
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBb6r264RJFqhWcbSlzuMatum_MO3A6BoY&callback=initMap"></script>

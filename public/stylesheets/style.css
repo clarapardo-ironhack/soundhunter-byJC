@@ -127,6 +127,10 @@ footer {
     /* width: 100%; */
     color: #17C3B2;
 }
+.footer-aboutUs-list {
+list-style: none;
+font-size: 0.8em;
+}
 
 
 
@@ -236,4 +240,28 @@ input:-webkit-autofill:active {
     height: 400px;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.scrolling-wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+/* .scrolling-wrapper-flexbox {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+} */
+
+.artist-card{
+    background-color: #212529;
+    color: #fff;
+}
+
+.round-followers{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border: 1px solid red;
 }
