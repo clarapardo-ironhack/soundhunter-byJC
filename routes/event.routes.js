@@ -3,6 +3,9 @@ const SpotifyWebApi = require("spotify-web-api-node")
 const Event = require('../models/Event.model')
 const User = require('../models/User.model')
 const fileUploader = require("./../config/cloudinary.config")
+const { getFullDate, getFullTime } = require("../utils/dateFormatter")
+
+
 
 // ######################## ESTO DEBERÍA IR EN APP.JS PERO SI NO NO FUNCIONA ########################################################
 // ######################## ADEMÁS NECESITO QUE TODO EL RESTO DE RUTAS TENGAN ACCESO TB #############################################
@@ -58,28 +61,24 @@ router.get('/:id', (req, res, next) => {
         .populate('artists')
         .then(selectedEvent => {
 
-            const fullTime = `${selectedEvent.date.getHours()}:${selectedEvent.date.getMinutes()}h`
-            const fullDate = `${selectedEvent.date.getDate()}.${selectedEvent.date.getMonth() + 1}.${selectedEvent.date.getFullYear()}`
-
             const fullArtists = selectedEvent.artists.map(artist => spotifyApi.getArtist(artist.idSpotify))
 
-            Promise
-                .all(fullArtists)
-                .then(responses => {
-
-                    const fullArtistsImage = selectedEvent.artists.map((elm, idx) => {
-                        return { ...elm._doc, image: responses[idx].body.images[0].url }
-                    })
-
-                    // console.log('LOOOOL', fullArtistsImage)
-
-                    res.render('event/event', { selectedEvent, fullTime, fullDate, fullArtistsImage })
-
-                })
-                .catch(err => console.log(err))
+            return [Promise.all(fullArtists), selectedEvent]
         })
-        .catch(err => next(err))
+        .then(([responses, selectedEvent]) => {
+
+            const fullTime = getFullTime(selectedEvent.date)
+            const fullDate = getFullDate(selectedEvent.date)
+
+            const fullArtistsImage = selectedEvent.artists.map((elm, idx) => {
+                return { ...elm._doc, image: responses[idx].body.images[0].url }
+            })
+
+            res.render('event/event', { selectedEvent, fullTime, fullDate, fullArtistsImage })
+        })
+        .catch(err => console.log(err))
 })
+
 
 
 
@@ -89,24 +88,21 @@ router.get('/:eventId/join', (req, res, next) => {
     const userId = req.session.currentUser._id
     const { eventId } = req.params
 
-
     if (!myUser.savedEvents.includes(eventId.toString())) {
 
-        User
-            .findByIdAndUpdate(userId, { $push: { savedEvents: eventId } }, { new: true })
-            .then(selectedEvent => {
+        const promises = [
+            User.findByIdAndUpdate(userId, { $push: { savedEvents: eventId } }),
+            Event.findByIdAndUpdate(eventId, { $push: { followers: myUser } }, { new: true })
+        ]
 
-                Event
-                    .findByIdAndUpdate(eventId, { $push: { followers: myUser } }, { new: true })
-                    .then(selectedEvent => {
-                        console.log('----------SOY MI EVENTO-----------' + selectedEvent.followers)
-                        res.redirect(`event/${selectedEvent._id}`)
-                    })
-                    .catch(err => next(err))
+        Promise
+            .all(promises)
+            .then(([updatedUser, modifiedEvent]) => {
+                res.redirect(`event/${modifiedEvent._id}`)
             })
             .catch(err => next(err))
-    } else {
 
+    } else {
         res.redirect('/')
     }
 })

@@ -45,7 +45,6 @@ router.get("/artist/:id", (req, res, next) => {
             res.render('profile/artist-profile', artist)
         })
         .catch(err => next(err))
-
 })
 
 router.get("/artist/:id/edit", (req, res, next) => {
@@ -61,8 +60,6 @@ router.get("/artist/:id/edit", (req, res, next) => {
             res.render('profile/artist-edit', artist)
         })
         .catch(err => next(err))
-
-
 })
 
 router.post("/artist/:id/edit", (req, res, next) => {
@@ -76,7 +73,6 @@ router.post("/artist/:id/edit", (req, res, next) => {
             res.redirect('/')
         })
         .catch(err => next(err))
-
 })
 
 
@@ -86,12 +82,9 @@ router.post("/artist/:id/edit", (req, res, next) => {
 router.get("/user/:id", isLoggedIn, (req, res, next) => {
 
     const { id } = req.params
-    console.log(id)
 
     const isAdmin = req.session.currentUser.role === 'ADMIN'
     const isUser = req.session.currentUser.role === 'USER'
-
-
 
     User
         .findById(id)
@@ -100,12 +93,10 @@ router.get("/user/:id", isLoggedIn, (req, res, next) => {
             res.render('profile/user-profile', user, isAdmin, isUser)
         })
         .catch(err => next(err))
-
 })
 
 
 router.get("/user/:id/edit", isLoggedIn, (req, res, next) => {
-
 
     const { id } = req.params
 
@@ -118,9 +109,8 @@ router.get("/user/:id/edit", isLoggedIn, (req, res, next) => {
             res.render('profile/user-edit', user, isAdmin, isUser)
         })
         .catch(err => next(err))
-
-
 })
+
 
 router.post("/user/:id/edit", (req, res, next) => {
 
@@ -130,7 +120,6 @@ router.post("/user/:id/edit", (req, res, next) => {
     User
         .findByIdAndUpdate(id, { name, lastname, image, favoriteGenres })
         .then(user => {
-            console.log(id)
             res.redirect('/')
         })
         .catch(err => next(err))
@@ -147,15 +136,11 @@ router.post("/user/:id/delete", (req, res, next) => {
             res.redirect('/')
         })
         .catch(err => next(err))
-
-
-
 })
 
 
 
 // ----------> USER: choose favorite genres <----------
-
 
 router.get("/signin-user/musicGenres", (req, res) => {
 
