@@ -29,6 +29,14 @@ spotifyApi
 
 // ----------> ARTIST ROUTES <----------
 
+
+router.get("/artist-search", (req, res, next) => {
+
+    
+
+})
+
+
 router.get("/artist/:id", isLoggedIn, (req, res, next) => {
 
     const { id } = req.params
@@ -41,7 +49,7 @@ router.get("/artist/:id", isLoggedIn, (req, res, next) => {
         .getArtist(id)
         .then((artist) => {
             console.log(artist)
-            res.render('profile/artist-profile', artist, isAdmin, isArtist )
+            res.render('profile/artist-profile', artist, isAdmin, isArtist)
         })
         .catch(err => next(err))
 

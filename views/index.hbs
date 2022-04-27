@@ -1,22 +1,29 @@
-<div class="container mt-5 box-info">
+{{!-- <div class="container mt-5 box-info">
     <div class="row">
         <h1>{{appTitle}} 🚀</h1>
         <p>Welcome Ironhacker!</p>
 
     </div>
+</div> --}}
+
+<div class="container box-index">
+    <div class="row">
+        <h1>What ar U looking for?</h1>
+    </div>
 </div>
 
+
 {{!-- SEARCH BAR --}}
-<div class="container">
+<div class="container mt-3">
     <div class="row">
 
         <div class="search-index">
-           
-            <form class="d-flex search-box-index">
-                <input class="form-control  me-2" type="search" placeholder="Search" aria-label="Search">
+
+            <form class="d-flex search-box-index" action="/artist-search" method="GET">
+                <input class="form-control  me-2" type="search" placeholder="Your Favorite Artist" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
-            
+
         </div>
     </div>
 </div>

@@ -23,17 +23,38 @@ hr {
 
 /* INDEX */
 
+.box-index {
+    font-family: 'Syncopate', 'sans-serif';
+    color: white;
+    font-size: 3em;
+    margin: auto;
+    text-align: center;
+    margin-top: 150px;
+}
+
 .search-index {
 
     width: 80%;
     line-height: 400px;
+    height: 400px;
     margin: auto;
 }
 
 .search-box-index {
+    margin-top: 50px;
+    margin-left: 50px;
+    width: 60%;
+    text-align: center;
     display: block;
+    position: absolute;
+    z-index: 1000;
 
 }
+
+.search-box-index input {
+    font-family: 'Syncopate';
+}
+
 
 /* NAVBAR */
 
@@ -127,9 +148,10 @@ footer {
     /* width: 100%; */
     color: #17C3B2;
 }
+
 .footer-aboutUs-list {
-list-style: none;
-font-size: 0.8em;
+    list-style: none;
+    font-size: 0.8em;
 }
 
 
@@ -235,7 +257,7 @@ input:-webkit-autofill:active {
 }
 
 /* EVENTS */
-.event-hero{
+.event-hero {
     background-image: url('./../images/festival-bg.jpg');
     height: 400px;
     background-repeat: no-repeat;
@@ -254,12 +276,12 @@ input:-webkit-autofill:active {
     overflow-x: auto;
 } */
 
-.artist-card{
+.artist-card {
     background-color: #212529;
     color: #fff;
 }
 
-.round-followers{
+.round-followers {
     height: 40px;
     width: 40px;
     border-radius: 50%;
