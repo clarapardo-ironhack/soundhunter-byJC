@@ -30,42 +30,35 @@ spotifyApi
 // ----------> ARTIST ROUTES <----------
 
 
-router.get("/artist-search", (req, res, next) => {
-
-    
-
-})
-
-
-router.get("/artist/:id", isLoggedIn, (req, res, next) => {
+router.get("/artist/:id", (req, res, next) => {
 
     const { id } = req.params
 
-    const isAdmin = req.session.currentUser.role === 'ADMIN'
-    const isArtist = req.session.currentUser.role === 'ARTIST'
+    // const isAdmin = req.session.currentUser.role === 'ADMIN'
+    // const isArtist = req.session.currentUser.role === 'ARTIST'
 
     // res.render('profile/artist-profile')
     spotifyApi
         .getArtist(id)
         .then((artist) => {
             console.log(artist)
-            res.render('profile/artist-profile', artist, isAdmin, isArtist)
+            res.render('profile/artist-profile', artist)
         })
         .catch(err => next(err))
 
 })
 
-router.get("/artist/:id/edit", isLoggedIn, checkRole, (req, res, next) => {
+router.get("/artist/:id/edit", (req, res, next) => {
 
-    const isAdmin = req.session.currentUser.role === 'ADMIN'
-    const isArtist = req.session.currentUser.role === 'ARTIST'
+    // const isAdmin = req.session.currentUser.role === 'ADMIN'
+    // const isArtist = req.session.currentUser.role === 'ARTIST'
 
     const { id } = req.params
 
     User
         .findByIdAndUpdate(id)
         .then(artist => {
-            res.render('profile/artist-edit', artist, isAdmin, isArtist)
+            res.render('profile/artist-edit', artist)
         })
         .catch(err => next(err))
 
@@ -90,32 +83,39 @@ router.post("/artist/:id/edit", (req, res, next) => {
 // ----------> USER ROUTES <----------
 
 
-router.get("/user/:id", (req, res, next) => {
+router.get("/user/:id", isLoggedIn, (req, res, next) => {
 
     const { id } = req.params
     console.log(id)
+
+    const isAdmin = req.session.currentUser.role === 'ADMIN'
+    const isUser = req.session.currentUser.role === 'USER'
+
 
 
     User
         .findById(id)
         .then(user => {
             console.log(user)
-            res.render('profile/user-profile', user)
+            res.render('profile/user-profile', user, isAdmin, isUser)
         })
         .catch(err => next(err))
 
 })
 
 
-router.get("/user/:id/edit", (req, res, next) => {
+router.get("/user/:id/edit", isLoggedIn, (req, res, next) => {
 
 
     const { id } = req.params
 
+    const isAdmin = req.session.currentUser.role === 'ADMIN'
+    const isUser = req.session.currentUser.role === 'USER'
+
     User
         .findByIdAndUpdate(id)
         .then(user => {
-            res.render('profile/user-edit', user)
+            res.render('profile/user-edit', user, isAdmin, isUser)
         })
         .catch(err => next(err))
 
