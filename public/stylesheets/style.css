@@ -127,9 +127,10 @@ footer {
     /* width: 100%; */
     color: #17C3B2;
 }
+
 .footer-aboutUs-list {
-list-style: none;
-font-size: 0.8em;
+    list-style: none;
+    font-size: 0.8em;
 }
 
 
@@ -235,7 +236,7 @@ input:-webkit-autofill:active {
 }
 
 /* EVENTS */
-.event-hero{
+.event-hero {
     background-image: url('./../images/festival-bg.jpg');
     height: 400px;
     background-repeat: no-repeat;
@@ -254,12 +255,12 @@ input:-webkit-autofill:active {
     overflow-x: auto;
 } */
 
-.artist-card{
+.artist-card {
     background-color: #212529;
     color: #fff;
 }
 
-.round-followers{
+.round-followers {
     height: 40px;
     width: 40px;
     border-radius: 50%;

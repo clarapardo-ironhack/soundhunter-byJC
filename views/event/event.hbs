@@ -54,15 +54,16 @@
 
         <h5 class="mt-4">Collaborating artist</h5>
         <hr>
-        <div class="scrolling-wrapper" style="background-color: black; height: 200px">
+        <div class="scrolling-wrapper" style="background-color: black; height: 220px; display: flex">
 
-            {{#each selectedEvent.artists}}
-            <div class="card artist-card center-all" style="width: 12rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{name}}</h5>
+            {{#each fullArtistsImage}}
+            <div class="card artist-card center-all mx-3 my-2" style="width: 10rem;">
+                {{!-- <div style="background-image: url({{image}}); height: 100px"></div> --}}
+                <img src="{{image}}" class="card-img-top" alt="artist-profilePic" style="height: 120px">
+                <div class="mt-2">
+                    <h5 class="card-title" style="font-size: 0.8em">{{name}}</h5>
 
-                    <a href="/artist/{{idSpotify}}" class="btn btn-dark">See more</a>
+                    <a href="/artist/{{idSpotify}}" class="btn btn-dark" style="font-size: 0.7em">See more</a>
                 </div>
             </div>
             {{/each}}

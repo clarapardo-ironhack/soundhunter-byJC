@@ -1,8 +1,26 @@
 const router = require("express").Router()
-// const SpotifyWebApi = require("spotify-web-api-node")
+const SpotifyWebApi = require("spotify-web-api-node")
 const Event = require('../models/Event.model')
 const User = require('../models/User.model')
 const fileUploader = require("./../config/cloudinary.config")
+
+// ######################## ESTO DEBERÍA IR EN APP.JS PERO SI NO NO FUNCIONA ########################################################
+// ######################## ADEMÁS NECESITO QUE TODO EL RESTO DE RUTAS TENGAN ACCESO TB #############################################
+
+// Setting the spotify-api goes here:
+const spotifyApi = new SpotifyWebApi({
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET
+})
+
+// Retrieve an access token
+spotifyApi
+    .clientCredentialsGrant()
+    .then(data => spotifyApi.setAccessToken(data.body['access_token']))
+    .catch(error => console.log('Something went wrong when retrieving an access token', error))
+
+// ######################################################################################################################################
+// ######################################################################################################################################
 
 
 
@@ -40,10 +58,25 @@ router.get('/:id', (req, res, next) => {
         .populate('artists')
         .then(selectedEvent => {
 
-            const fullTime = `${selectedEvent.date.getHours()}:,${selectedEvent.date.getMinutes()}h`
+            const fullTime = `${selectedEvent.date.getHours()}:${selectedEvent.date.getMinutes()}h`
             const fullDate = `${selectedEvent.date.getDate()}.${selectedEvent.date.getMonth() + 1}.${selectedEvent.date.getFullYear()}`
 
-            res.render('event/event', { selectedEvent, fullTime, fullDate })
+            const fullArtists = selectedEvent.artists.map(artist => spotifyApi.getArtist(artist.idSpotify))
+
+            Promise
+                .all(fullArtists)
+                .then(responses => {
+
+                    const fullArtistsImage = selectedEvent.artists.map((elm, idx) => {
+                        return { ...elm._doc, image: responses[idx].body.images[0].url }
+                    })
+
+                    // console.log('LOOOOL', fullArtistsImage)
+
+                    res.render('event/event', { selectedEvent, fullTime, fullDate, fullArtistsImage })
+
+                })
+                .catch(err => console.log(err))
         })
         .catch(err => next(err))
 })
