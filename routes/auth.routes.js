@@ -97,6 +97,10 @@ router.post('/signin-artist', (req, res, next) => {
     spotifyApi
         .searchArtists(`${name}`)
         .then(function (data) {
+            // let aux = data.body.artists.filter({ name === inputNname })
+
+
+            console.log(aux)
             if (data.body.artists.items.length === 0) {
                 res.render('auth/signinArtist', { errorMessage: 'not an artist' })
             } else {

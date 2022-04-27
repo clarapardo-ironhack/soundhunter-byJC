@@ -1,11 +1,14 @@
 let map
+
 const latitude = document.querySelector('.latitude').innerHTML * 1
 const longitude = document.querySelector('.longitude').innerHTML * 1
+latitude = latitude * 1
+longitude = longitude * 1
+
 
 function initMap() {
-    console.log('-----------HELLO ESTOY AQUI-----------')
     renderMap()
-    getEvent()
+    eventMarker()
 }
 
 function renderMap() {
@@ -14,27 +17,19 @@ function renderMap() {
     map = new Map(
         document.querySelector('#eventMap'),
         {
-            center: { lat: 40.392499, lng: -3.698214 },
-            zoom: 10
+            center: { lat: latitude, lng: longitude },
+            zoom: 15
         }
     )
 }
 
-function getEvent() {
-
-    axios
-        .get('apiMaps/event/:id')
-        .then(({ data }) => eventMarker(data))
-        .catch(err => console.log(err))
-}
-
-function eventMarker(event) {
+function eventMarker() {
     const { Marker } = google.maps
 
     const position = {
-        lat: event.location.coordinates[0],
-        lng: event.location.coordinates[1]
+        lat: latitude,
+        lng: longitude
     }
 
-    new Marker({ position, title: event.name, map })
+    new Marker({ position, map })
 }
