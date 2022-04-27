@@ -29,10 +29,10 @@ spotifyApi
 router.get("/login", (req, res) => res.render('/auth/login'))
 
 router.post("/login", (req, res, next) => {
-    const { username, plainPwd } = req.body
+    const { email, plainPwd } = req.body
 
     User
-        .findOne({ username })
+        .findOne({ email })
         .then(user => {
             if (!user) {
                 res.render('auth/login', { errorMessage: 'Wrong user' })
