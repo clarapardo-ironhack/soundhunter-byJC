@@ -1,29 +1,10 @@
 const router = require("express").Router()
 const bcrypt = require('bcryptjs')
-const SpotifyWebApi = require("spotify-web-api-node")
+const spotifyApi = require('./../config/spotify.config')
 const User = require('./../models/User.model')
 const fileUploader = require("./../config/cloudinary.config")
 
 const saltRounds = 10
-
-// ######################## ESTO DEBERÍA IR EN APP.JS PERO SI NO NO FUNCIONA ########################################################
-// ######################## ADEMÁS NECESITO QUE TODO EL RESTO DE RUTAS TENGAN ACCESO TB #############################################
-
-// Setting the spotify-api goes here:
-const spotifyApi = new SpotifyWebApi({
-    clientId: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET
-})
-
-// Retrieve an access token
-spotifyApi
-    .clientCredentialsGrant()
-    .then(data => spotifyApi.setAccessToken(data.body['access_token']))
-    .catch(error => console.log('Something went wrong when retrieving an access token', error))
-
-// ######################################################################################################################################
-// ######################################################################################################################################
-
 
 // ----------> LOG IN <----------
 router.get("/login", (req, res) => res.render('/auth/login'))
@@ -67,7 +48,7 @@ router.post('/signin-user', fileUploader.single('image'), (req, res, next) => {
         urlImage = path
     }
 
-    if (username === undefined || email === undefined || plainPwd === undefined || name === undefined || lastname === undefined || city === undefined) {
+    if (username === '' || email === '' || plainPwd === '' || name === '' || lastname === '' || city === '') {
 
         res.render('auth/signinUser', { username, email, name, lastname, city, plainPwd, errorMessage: 'Please complete all the fields' })
 

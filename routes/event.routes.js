@@ -1,38 +1,16 @@
 const router = require("express").Router()
-const SpotifyWebApi = require("spotify-web-api-node")
+const spotifyApi = require('./../config/spotify.config')
 const Event = require('../models/Event.model')
 const User = require('../models/User.model')
 const fileUploader = require("./../config/cloudinary.config")
 const { getFullDate, getFullTime } = require("../utils/dateFormatter")
 
 
-
-// ######################## ESTO DEBERÍA IR EN APP.JS PERO SI NO NO FUNCIONA ########################################################
-// ######################## ADEMÁS NECESITO QUE TODO EL RESTO DE RUTAS TENGAN ACCESO TB #############################################
-
-// Setting the spotify-api goes here:
-const spotifyApi = new SpotifyWebApi({
-    clientId: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET
-})
-
-// Retrieve an access token
-spotifyApi
-    .clientCredentialsGrant()
-    .then(data => spotifyApi.setAccessToken(data.body['access_token']))
-    .catch(error => console.log('Something went wrong when retrieving an access token', error))
-
-// ######################################################################################################################################
-// ######################################################################################################################################
-
-
-
 // ----------> EVENT CREATION <----------
 router.get('/add-new', (req, res) => {
-    const roleArtist = { role: 'ARTIST' }
 
     User
-        .find(roleArtist)
+        .find({ role: 'ARTIST' })
         .then(allArtists => {
             res.render('event/new-event', { allArtists })
         })
@@ -45,7 +23,7 @@ router.post('/add-new', fileUploader.single('image'), (req, res, next) => {
 
     Event
         .create({ ...req.body, address: { street, number, city, postcode }, location: { type: "Point", coordinates: [lat, lng] }, image: path })
-        .then(res.redirect('/'))
+        .then(() => res.redirect('/'))
         .catch(err => next(err))
 })
 
@@ -111,13 +89,12 @@ router.get('/:eventId/join', (req, res, next) => {
 
 // ----------> EVENT COMMENTING <----------
 router.post('/:eventId/add-comment', (req, res, next) => {
-    const myUser = req.session.currentUser
     const { eventId } = req.params
     const { comment } = req.body
 
     Event
         .findByIdAndUpdate(eventId, { $push: { comments: { user: req.session.currentUser.username, comment } } })
-        .then(res.redirect('/'))
+        .then(() => res.redirect('/'))
         .catch(err => next(err))
 })
 

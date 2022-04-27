@@ -7,7 +7,6 @@ router.get('/event/:id', (req, res) => {
     Event
         .findById(id)
         .then(event => {
-            console.log('-----------HOLI HOLI----------')
             res.json(event)
         })
         .catch(err => res.status(500).json({ message: 'Server error', error: err }))
