@@ -63,22 +63,24 @@ router.get('/:id', (req, res, next) => {
 
             const fullArtists = selectedEvent.artists.map(artist => spotifyApi.getArtist(artist.idSpotify))
 
-            return [Promise.all(fullArtists), selectedEvent]
-        })
-        .then(([responses, selectedEvent]) => {
-
             const fullTime = getFullTime(selectedEvent.date)
             const fullDate = getFullDate(selectedEvent.date)
 
-            const fullArtistsImage = selectedEvent.artists.map((elm, idx) => {
-                return { ...elm._doc, image: responses[idx].body.images[0].url }
-            })
+            Promise
+                .all(fullArtists)
+                .then(responses => {
 
-            res.render('event/event', { selectedEvent, fullTime, fullDate, fullArtistsImage })
+                    const fullArtistsImage = selectedEvent.artists.map((elm, idx) => {
+                        return { ...elm._doc, image: responses[idx].body.images[0].url }
+                    })
+
+                    res.render('event/event', { selectedEvent, fullTime, fullDate, fullArtistsImage })
+                })
+                .catch(err => console.log(err))
         })
         .catch(err => console.log(err))
-})
 
+})
 
 
 
