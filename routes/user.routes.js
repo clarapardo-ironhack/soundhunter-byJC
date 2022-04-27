@@ -29,7 +29,7 @@ spotifyApi
 
 // ----------> ARTIST ROUTES <----------
 
-router.get("/artist/:id", isLoggedIn, checkRole, (req, res, next) => {
+router.get("/artist/:id", isLoggedIn, (req, res, next) => {
 
     const { id } = req.params
 
@@ -49,10 +49,10 @@ router.get("/artist/:id", isLoggedIn, checkRole, (req, res, next) => {
 
 router.get("/artist/:id/edit", isLoggedIn, checkRole, (req, res, next) => {
 
-    const { id } = req.params
-    
     const isAdmin = req.session.currentUser.role === 'ADMIN'
     const isArtist = req.session.currentUser.role === 'ARTIST'
+
+    const { id } = req.params
 
     User
         .findByIdAndUpdate(id)
