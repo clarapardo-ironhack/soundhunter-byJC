@@ -88,7 +88,6 @@ router.post('/:eventId/add-comment', (req, res, next) => {
         .findByIdAndUpdate(eventId, { $push: { comments: { user: req.session.currentUser.username, comment } } })
         .then(res.redirect('/'))
         .catch(err => next(err))
-
 })
 
 
