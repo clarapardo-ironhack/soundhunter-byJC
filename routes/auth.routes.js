@@ -96,28 +96,27 @@ router.post('/signin-artist', (req, res, next) => {
 
     spotifyApi
         .searchArtists(`${name}`)
-        .then(function (data) {
-            // let aux = data.body.artists.filter({ name === inputNname })
-
-
-            console.log(aux)
+        .then(data => {
+            // console.log(data.body.artists.items[0])
             if (data.body.artists.items.length === 0) {
                 res.render('auth/signinArtist', { errorMessage: 'not an artist' })
             } else {
-                // document.querySelector('.dissapear').innerHTML('display: none')
-                res.render('auth/signinArtist2', { name })
+                res.render('auth/signinArtist2', data.body.artists.items[0])
             }
         })
         .catch(err => next(err))
+
 })
 
 router.post('/signin-artist_', (req, res, next) => {
-    const { name, email, plainPwd, role } = req.body
+    const { name, email, plainPwd, role, idSpotify } = req.body
+
+    // console.log('-----------EL ID QUE HA COGIDO DE SPOTIFY ES-----------' + idSpotify)
 
     bcrypt
         .genSalt(saltRounds)
         .then(salt => bcrypt.hash(plainPwd, salt))
-        .then(hashedPassword => User.create({ name, email, role, password: hashedPassword }))
+        .then(hashedPassword => User.create({ name, email, role, password: hashedPassword, idSpotify }))
         .then(createdUser => {
             req.session.currentUser = createdUser
             res.redirect('/')
