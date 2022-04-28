@@ -4,14 +4,6 @@ body {
     background-size: cover;
 }
 
-.index-carousel {
-    width: 80%;
-    margin: auto;
-    height: 250px;
-    background-color: red;
-
-}
-
 .box-index {
     font-family: 'Syncopate', 'sans-serif';
     color: white;
@@ -22,34 +14,32 @@ body {
     height: 300px;
 }
 
-/* .search-index {
-
+.carousel-container {
     width: 80%;
-    line-height: 400px;
-    height: 400px;
+    color: white;
     margin: auto;
 }
 
-.search-box-index {
-    margin-top: 50px;
-    margin-left: 50px;
-    width: 60%;
-    text-align: center;
-    display: block;
-    position: absolute;
-    z-index: 1000;
-
+.carousel-container h5 {
+    font-family: 'Syncopate', sans-serif;
 }
 
-.search-box-index input {
-    font-family: 'Syncopate';
-} */
+.carousel {
+    height: 200px;
+    display: flex;
+    scroll-snap-type: x mandatory;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
 
-/* BUTTON SLIDER */
+.carousel a {
+    display: block;
+}
 
-button::before {
-    content: '';
-    width: 0;
-    height: 0;
-
+.carousel img {
+    width: 150px;
+    flex: 50 0 100%;
+    object-fit: cover;
+    scroll-snap-align: center;
+    border: 2px solid black;
 }
