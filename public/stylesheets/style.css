@@ -1,5 +1,5 @@
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 300;
     background-color: rgb(63, 63, 63);
 }
@@ -89,9 +89,11 @@ hr {
 
 
 /* USER PROFILE */
+/* ARREGLAR ESTO ----------------------------------------------- */
 .img-profile-user {
     width: 60%;
     border-radius: 50%;
+    margin-left: 100px;
 }
 
 .box-info-user {
@@ -123,6 +125,12 @@ hr {
     border-radius: 20px;
     margin-right: 20px;
     font-size: 0.8em;
+}
+
+.col-user-profile {
+    padding: 20px;
+
+
 }
 
 /* ARTIST PROFILE */

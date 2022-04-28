@@ -86,24 +86,30 @@ router.post('/signin-artist', (req, res, next) => {
             }
         })
         .catch(err => next(err))
-
 })
 
 router.post('/signin-artist_', (req, res, next) => {
     const { name, email, plainPwd, role, idSpotify } = req.body
 
     // console.log('-----------EL ID QUE HA COGIDO DE SPOTIFY ES-----------' + idSpotify)
-
     bcrypt
         .genSalt(saltRounds)
         .then(salt => bcrypt.hash(plainPwd, salt))
         .then(hashedPassword => User.create({ name, email, role, password: hashedPassword, idSpotify }))
         .then(createdUser => {
             req.session.currentUser = createdUser
-            res.redirect('/')
+
+            spotifyApi
+                .getArtist(idSpotify)
+                .then(user => {
+                    res.render('profile/artist-profile', user)
+                })
+                .catch(err => next(err))
+            // res.redirect('/artist/{{idSpotify}}')
         })
         .catch(err => next(err))
 })
+
 
 
 

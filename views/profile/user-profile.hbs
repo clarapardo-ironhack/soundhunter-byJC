@@ -40,6 +40,26 @@
             <img class="img-profile-user" src="{{user.image}}" alt="">
         </div>
 
+{{!-- ARREGLAR ESTO -------------------- --}}
+
+    <div class="row card ">
+        <div class="col-md-4 card2 col-user-profile ">
+            <p><strong>NAME</strong><br>{{user.name}}</p>
+            <p><strong>USERNAME</strong><br>{{username}}</p><br>
+            <p><strong>FAVORITE GENRES</strong></p>
+            {{#each favoriteGenres}}
+            <span>{{this}} </span>
+            {{/each}}
+            <br><br>
+            <p><strong>CITY</strong><br>{{city}}</p>
+            <p><strong>FRIENDS</strong><br>{{friends}}</p>
+            <a href="/user/{{_id}}/edit"><button>edit profile</button></a>
+            <a href="#"><button>follow</button></a>
+            <a href="#"><button>events</button></a>
+        </div>
+        <div class="col-md-8">
+            <img class="img-profile-user" src="{{image}}" alt="">
+        </div>
     </div>
 
 </div>

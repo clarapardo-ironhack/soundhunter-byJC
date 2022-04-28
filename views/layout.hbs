@@ -9,7 +9,11 @@
    {{!-- FONTS --}}
    <link rel="preconnect" href="https://fonts.googleapis.com">
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Roboto:wght@300;400&display=swap"
+      rel="stylesheet">
+
 
 
    {{!-- BOOTSTRAP --}}
@@ -24,9 +28,8 @@
    {{!-- CSS --}}
    <link rel="stylesheet" href="/stylesheets/style.css" />
    <link rel="stylesheet" href="/stylesheets/button.css">
+   <link rel="stylesheet" href="/stylesheets/card.css">
 
-   {{!-- CARROUSEL --}}
-   <link rel="stylesheet" href="./../node_modules/@splidejs/splide/dist/css/splide.min.css">
 </head>
 
 <body>
@@ -54,8 +57,7 @@
                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
                      </svg></a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                     <li><a class="dropdown-item" href="/user/{{user._id}}">My profile</a></li>
-                     <li><a class="dropdown-item" href="#">Another action</a></li>
+                     <li><a class="dropdown-item" href="/profile">My profile</a></li>
                      <li>
                         <form action="/logout" method="POST">
                            <button class="dropdown-item">Log out <svg xmlns="http://www.w3.org/2000/svg" width="16"
