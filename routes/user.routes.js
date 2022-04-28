@@ -75,6 +75,7 @@ router.get("/profile", (req, res, next) => {
     User
         .findById(_id)
         .populate('friends')
+        .populate('savedEvents')
         .then(user => {
 
             const fullDate = getFullDate(user.createdAt)
@@ -94,6 +95,8 @@ router.get("/user/:id", isLoggedIn, (req, res, next) => {
 
     User
         .findById(id)
+        .populate('friends')
+        .populate('savedEvents')
         .then(user => {
 
             const fullDate = getFullDate(user.createdAt)

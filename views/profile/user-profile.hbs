@@ -3,7 +3,7 @@
     <div class="row text-sign mt-5">
 
         <div class="col-md-8">
-            <div class="row card center-vertically p-2">
+            <div class="row card-rainbow center-vertically p-2">
 
                 <div class="card2 col-user-profile">
                     <div class="row">
@@ -23,7 +23,7 @@
                             {{#if isNOTSelfUser}}
                             <form action="/user/{{user._id}}/follow" method="POST">
                                 <input type="text" class="form-control mt-3 form-box" style="display: none" id="id"
-                                     name="id" value="{{user._id}}">
+                                    name="id" value="{{user._id}}">
                                 <button type="submit" class="user-signin-btn">Follow</button>
                             </form>
                             {{/if}}
@@ -42,28 +42,43 @@
                 {{/each}}
             </div>
 
+
             <h5 class="mt-5">Upcoming events</h5>
             <hr>
-            <div style="height: 200px; background-color: black"></div>
+            <div style="height: 200px">
 
-            <h5 class="mt-5 ">Friends</h5>
+                {{#each user.savedEvents}}
+                <div class="card artist-card center-all mx-3 my-2" style="width: 10rem;">
+                    <img src="{{image}}" class="card-img-top" alt="artist-profilePic" style="height: 150px">
+                    <div class="mt-2 center-all">
+                        <h6 style="font-size: 0.8em">{{address.city}} {{fullDate}}</h6>
+                
+                        <a href="/artist/{{idSpotify}}" class="event-scroll" style="font-family: syncopate">{{name}}</a>
+                    </div>
+                </div>
+                {{/each}}
+
+            </div>
+
+
+            <h5 class="mt-5 ">Friends - {{user.friends.length}} </h5>
             <hr>
-            <div style="height: 200px; background-color: black">
+            <div style="height: 200px">
 
                 {{#each user.friends}}
-                <div class="card artist-card center-all mx-3 my-2" style="width: 10rem;">
-                    {{!-- <div style="background-image: url({{image}}); height: 100px"></div> --}}
-                    <img src="{{image}}" class="card-img-top" alt="artist-profilePic" style="height: 120px">
+                <div class="card center-all mx-3 my-2" style="width: 10rem; background-color: transparent; border: 0px">
+                    <div class="friends-round"
+                        style="background-image: url('{{image}}'); background-repeat: no-repeat; background-size: cover;">
+                    </div>
                     <div class="mt-2">
-                        <h5 class="card-title" style="font-size: 0.8em">{{name}}</h5>
-                
-                        <a href="/artist/{{idSpotify}}" class="btn btn-dark" style="font-size: 0.7em">See more</a>
+                        <a href="/user/{{id}}" style="font-size: 0.8em; text-decoration: none;"
+                            class="text-sign">{{name}}</a>
+                        {{!-- <a href="/artist/{{idSpotify}}" class="btn btn-dark" style="font-size: 0.7em">See more</a>
+                        --}}
                     </div>
                 </div>
                 {{/each}}
             </div>
-
-
 
         </div>
         <div class="col-md-4 ml-5 center-horizontally">

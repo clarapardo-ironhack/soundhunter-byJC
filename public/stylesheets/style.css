@@ -54,9 +54,9 @@ hr {
 
 
 /* USER PROFILE */
-/* ARREGLAR ESTO ----------------------------------------------- */
 .img-profile-user {
-    width: 60%;
+    width: 300px;
+    height: 300px;
     border-radius: 50%;
     margin-left: 100px;
 }
@@ -98,6 +98,23 @@ hr {
 
 
 }
+
+.friends-round{
+    border-radius: 50%;
+    height: 85px;
+    width: 85px;
+}
+
+.event-scroll{
+    font-family: syncopate;
+    text-decoration: none;
+    color: white
+}
+
+.event-scroll:hover {
+    color: #17C3B2
+}
+
 
 /* ARTIST PROFILE */
 
