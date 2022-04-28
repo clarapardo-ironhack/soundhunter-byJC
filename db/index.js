@@ -10,6 +10,7 @@ mongoose
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
     // return User.deleteMany()
   })
+
   .then(() => User.syncIndexes())
   // .then(() => Event.deleteMany())
   .then(() => Event.syncIndexes())
