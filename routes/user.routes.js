@@ -6,11 +6,10 @@ const fileUploader = require("./../config/cloudinary.config")
 const { getFullDate, getFullTime } = require("../utils/dateFormatter")
 const { isLoggedIn, checkRole } = require("../middleware/authVerification")
 
-
 const saltRounds = 10
 
 // ----------> ARTIST ROUTES <----------
-router.get("/myprofile-artist", (req, res, next) => {
+router.get("/myprofile-artist", isLoggedIn, (req, res, next) => {
     const { idSpotify } = req.session.currentUser
 
     spotifyApi
@@ -22,8 +21,7 @@ router.get("/myprofile-artist", (req, res, next) => {
 
 })
 
-
-router.get("/artist/:id", (req, res, next) => {
+router.get("/artist/:id", isLoggedIn, (req, res, next) => {
 
     const { id } = req.params
 
@@ -56,18 +54,20 @@ router.get("/artist/:id", (req, res, next) => {
 })
 
 // ----------> ARTIST: follow <----------
-router.post("/artist_/:artistId/follow", (req, res, next) => {
+router.post("/artist_/:artistId/follow", isLoggedIn, (req, res, next) => {
     const myUser = req.session.currentUser
     const userId = req.session.currentUser._id
     const { artistId } = req.params
-    const { spotifyArtistId } = req.body
+    let { spotifyArtistId } = req.body
 
-    console.log('----------EL ID DEL URL----------' + artistId)
+    // console.log('----------EL ID DEL URL----------' + spotifyArtistId)
 
     if (!myUser.favouriteArtists.includes(artistId.toString())) {
 
-        User.findByIdAndUpdate(userId, { $push: { favouriteArtists: artistId } })
+        User.findByIdAndUpdate(userId, { $push: { favouriteArtists: artistId } }, { new: true })
             .then(user => {
+                // console.log(user)
+                // const {idSpotify} = user
                 res.redirect(`/artist/${spotifyArtistId}`)
             })
             .catch(err => next(err))
@@ -77,9 +77,7 @@ router.post("/artist_/:artistId/follow", (req, res, next) => {
     }
 })
 
-
-
-router.get("/artist/:id/edit", (req, res, next) => {
+router.get("/artist/:id/edit", isLoggedIn, (req, res, next) => {
 
     const { idSpotify } = req.params
 
@@ -91,7 +89,7 @@ router.get("/artist/:id/edit", (req, res, next) => {
         .catch(err => next(err))
 })
 
-router.post("/artist/:id/edit", (req, res, next) => {
+router.post("/artist/:id/edit", isLoggedIn, (req, res, next) => {
 
     const { idSpotify } = req.params
     const { name, image } = req.body
@@ -106,23 +104,29 @@ router.post("/artist/:id/edit", (req, res, next) => {
 
 
 // ----------> USER ROUTES <----------
-router.get("/profile", (req, res, next) => {
+router.get("/profile", isLoggedIn, (req, res, next) => {
 
-    const { _id } = req.session.currentUser
+    if (req.session.currentUser.role === 'ARTIST') {
 
-    const isSelfUser = req.session.currentUser.role === 'USER'
+        res.redirect('/myprofile-artist')
 
-    User
-        .findById(_id)
-        .populate('friends')
-        .populate('savedEvents')
-        .then(user => {
+    } else if (req.session.currentUser.role === 'USER') {
 
-            const fullDate = getFullDate(user.createdAt)
-
-            res.render('profile/user-profile', { user, fullDate, isSelfUser })
-        })
-        .catch(err => next(err))
+        const { _id } = req.session.currentUser
+        const isSelfUser = req.session.currentUser.role === 'USER'
+    
+        User
+            .findById(_id)
+            .populate('friends')
+            .populate('savedEvents')
+            .then(user => {
+    
+                const fullDate = getFullDate(user.createdAt)
+    
+                res.render('profile/user-profile', { user, fullDate, isSelfUser })
+            })
+            .catch(err => next(err))
+    }
 })
 
 
@@ -163,7 +167,7 @@ router.get("/user/:id/edit", isLoggedIn, (req, res, next) => {
 })
 
 
-router.post("/user/:id/edit", fileUploader.single('image'), (req, res, next) => {
+router.post("/user/:id/edit", isLoggedIn, fileUploader.single('image'), (req, res, next) => {
 
     const { id } = req.params
     const { name, lastname, image, favoriteGenres } = req.body
@@ -179,7 +183,7 @@ router.post("/user/:id/edit", fileUploader.single('image'), (req, res, next) => 
 
 })
 
-router.post("/user/:id/delete", (req, res, next) => {
+router.post("/user/:id/delete", isLoggedIn, (req, res, next) => {
 
     const { id } = req.params
 
@@ -193,7 +197,7 @@ router.post("/user/:id/delete", (req, res, next) => {
 
 
 // ----------> USER: choose favorite genres <----------
-router.get("/signin-user/musicGenres", (req, res, next) => {
+router.get("/signin-user/musicGenres", isLoggedIn, (req, res, next) => {
 
     spotifyApi
         .getAvailableGenreSeeds()
@@ -203,7 +207,7 @@ router.get("/signin-user/musicGenres", (req, res, next) => {
         .catch(err => next(err))
 })
 
-router.post("/signin-user/musicGenres", (req, res, next) => {
+router.post("/signin-user/musicGenres", isLoggedIn, (req, res, next) => {
     const { favoriteGenres } = req.body
     const id = req.session.currentUser._id
 
@@ -215,7 +219,7 @@ router.post("/signin-user/musicGenres", (req, res, next) => {
 
 
 // ----------> USER: follow new people <----------
-router.post("/user/:friendId/follow", (req, res, next) => {
+router.post("/user/:friendId/follow", isLoggedIn, (req, res, next) => {
     const myUser = req.session.currentUser
     const userId = req.session.currentUser._id
     const { friendId } = req.params

@@ -27,7 +27,7 @@
 
             {{!-- {{#if isUser}} --}}
             <form action="/artist_/{{artistAux._id}}/follow" method="POST">
-                <input type="text" class="form-control mt-3 form-box" style="display: none" id="id" name="id" value="{{artistAux.idSpotify}}">
+                <input type="text" class="form-control mt-3 form-box" style="display: none" id="spotifyArtistId" name="spotifyArtistId" value="{{artistAux.idSpotify}}">
                 <button type="submit" class="user-signin-btn">Follow</button>
             </form>
             {{!-- {{/if}} --}}

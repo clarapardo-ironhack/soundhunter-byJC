@@ -1,10 +1,7 @@
 <div class="container">
-
     <div class="row text-sign mt-5">
-
         <div class="col-md-8">
             <div class="row card-rainbow center-vertically p-2">
-
                 <div class="card2 col-user-profile">
                     <div class="row">
                         <div class="col-md-8">
@@ -15,11 +12,9 @@
                             <h6><br>PONER CUALQUIER CHORRADA</h6>
                         </div>
                         <div class="col-md-4 center-all">
-                            
                             {{#if isSelfUser}}
                             <a href="/user/{{user._id}}/edit"><button class="user-signin-btn">edit profile</button></a>
                             {{/if}}
-
                             {{#if isNOTSelfUser}}
                             <form action="/user/{{user._id}}/follow" method="POST">
                                 <input type="text" class="form-control mt-3 form-box" style="display: none" id="id"
@@ -31,7 +26,6 @@
                     </div>
                 </div>
             </div>
-
             <h5 class="mt-5">Favourite genres</h5>
             <hr>
             <div style="display: flex">
@@ -40,40 +34,34 @@
                 {{/each}}
             </div>
 
+
             <h5 class="mt-5">Upcoming events</h5>
             <hr>
-            <div style="height: 200px">
-
+            <div style="height: 250px" class="carousel">
                 {{#each user.savedEvents}}
-                <div class="card artist-card center-all mx-3 my-2" style="width: 10rem;">
-                    <img src="{{image}}" class="card-img-top" alt="artist-profilePic" style="height: 150px">
-                    <div class="mt-2 center-all">
-                        <h6 style="font-size: 0.8em">{{address.city}} {{fullDate}}</h6>
-
-                        <a href="/event/{{id}}" class="event-scroll" style="font-family: syncopate">{{name}}</a>
+                <div class="card artist-card mx-3" style="width: 10rem; height: 220px">
+                    <div
+                        style="background-image: url('{{image}}'); background-repeat: no-repeat; background-size: cover; height: 150px">
                     </div>
-                <div class="carousel">
-                    <a href="event/{{_id}}"><img src="./../images/rufusgira.jpeg" alt=""></a>
-                    <a href="event/{{_id}}"><img src="./../images/rufusgira.jpeg" alt=""></a>
-                    <a href="event/{{_id}}"><img src="./../images/rufusgira.jpeg" alt=""></a>
-                    <a href="event/{{_id}}"><img src="./../images/rufusgira.jpeg" alt=""></a>
-                    <a href="event/{{_id}}"><img src="./../images/rufusgira.jpeg" alt=""></a>
-                    <a href="event/{{_id}}"><img src="./../images/rufusgira.jpeg" alt=""></a>
-                    <a href="event/{{_id}}"><img src="./../images/rufusgira.jpeg" alt=""></a>
-                    <a href="event/{{_id}}"><img src="./../images/rufusgira.jpeg" alt=""></a>
-                    <a href="event/{{_id}}"><img src="./../images/rufusgira.jpeg" alt=""></a>
+                    <div class="mt-2 center-all">
+                        <h6 style="font-size: 0.8em">{{address.city}}</h6>
+                        <h6 class="center-all"><a href="/artist/{{idSpotify}}" class="event-scroll"
+                                style="font-size: 0.7em">{{name}}</a></h6>
+                    </div>
                 </div>
+                {{/each}}
+
             </div>
+
 
             <div style="display: flex; justify-content: space-between;">
                 <div>
                     <h5 class="mt-5">Friends</h5>
                 </div>
                 <div>
-                   <h5 class="mt-5 mr-5">{{user.friends.length}}</h5>
+                    <h5 class="mt-5 mr-5">{{user.friends.length}}</h5>
                 </div>
             </div>
-            <h5 class="mt-5 ">Friends - {{user.friends.length}} </h5>
             <hr>
             <div style="height: 200px">
 
@@ -91,11 +79,9 @@
                 </div>
                 {{/each}}
             </div>
-
         </div>
         <div class="col-md-4 ml-5 center-horizontally">
             <img class="img-profile-user" src="{{user.image}}" alt="">
         </div>
-
     </div>
 </div>

@@ -102,7 +102,7 @@ router.post('/signin-artist_', (req, res, next) => {
             spotifyApi
                 .getArtist(idSpotify)
                 .then(user => {
-                    res.render('profile/artist-profile', user)
+                    res.redirect("/")
                 })
                 .catch(err => next(err))
             // res.redirect('/artist/{{idSpotify}}')

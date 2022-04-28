@@ -20,7 +20,7 @@ router.get('/add-new', isLoggedIn, checkRole('ARTIST', 'ADMIN'), (req, res) => {
         .catch(err => next(err))
 })
 
-router.post('/add-new', fileUploader.single('image'), (req, res, next) => {
+router.post('/add-new', isLoggedIn, fileUploader.single('image'), (req, res, next) => {
     const { lat, lng, street, number, city, postcode } = req.body
     const { path } = req.file
 
@@ -33,7 +33,7 @@ router.post('/add-new', fileUploader.single('image'), (req, res, next) => {
 
 
 // ----------> EVENT READING <----------
-router.get('/:id',  (req, res, next) => {
+router.get('/:id', isLoggedIn, (req, res, next) => {
     const { id } = req.params
 
     Event
@@ -80,7 +80,9 @@ router.get('/:eventId/join', isLoggedIn, (req, res, next) => {
         Promise
             .all(promises)
             .then(([updatedUser, modifiedEvent]) => {
-                res.redirect(`event/${modifiedEvent._id}`)
+                console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@' + modifiedEvent._id)
+                let idEvent = modifiedEvent._id
+                res.redirect(`/event/${idEvent}`)
             })
             .catch(err => next(err))
 
@@ -90,7 +92,7 @@ router.get('/:eventId/join', isLoggedIn, (req, res, next) => {
 })
 
 // ----------> EVENT COMMENTING <----------
-router.post('/:eventId/add-comment', (req, res, next) => {
+router.post('/:eventId/add-comment', isLoggedIn, (req, res, next) => {
     const { eventId } = req.params
     const { comment } = req.body
 
