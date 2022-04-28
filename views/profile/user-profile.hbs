@@ -15,7 +15,7 @@
                             <h6><br>PONER CUALQUIER CHORRADA</h6>
                         </div>
                         <div class="col-md-4 center-all">
-
+                            
                             {{#if isSelfUser}}
                             <a href="/user/{{user._id}}/edit"><button class="user-signin-btn">edit profile</button></a>
                             {{/if}}
@@ -30,9 +30,7 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
 
             <h5 class="mt-5">Favourite genres</h5>
             <hr>
@@ -42,24 +40,21 @@
                 {{/each}}
             </div>
 
-
             <h5 class="mt-5">Upcoming events</h5>
             <hr>
             <div style="height: 200px">
-
-                {{#each user.savedEvents}}
-                <div class="card artist-card center-all mx-3 my-2" style="width: 10rem;">
-                    <img src="{{image}}" class="card-img-top" alt="artist-profilePic" style="height: 150px">
-                    <div class="mt-2 center-all">
-                        <h6 style="font-size: 0.8em">{{address.city}} {{fullDate}}</h6>
-                
-                        <a href="/artist/{{idSpotify}}" class="event-scroll" style="font-family: syncopate">{{name}}</a>
-                    </div>
+                <div class="carousel">
+                    <a href="event/{{_id}}"><img src="./../images/rufusgira.jpeg" alt=""></a>
+                    <a href="event/{{_id}}"><img src="./../images/rufusgira.jpeg" alt=""></a>
+                    <a href="event/{{_id}}"><img src="./../images/rufusgira.jpeg" alt=""></a>
+                    <a href="event/{{_id}}"><img src="./../images/rufusgira.jpeg" alt=""></a>
+                    <a href="event/{{_id}}"><img src="./../images/rufusgira.jpeg" alt=""></a>
+                    <a href="event/{{_id}}"><img src="./../images/rufusgira.jpeg" alt=""></a>
+                    <a href="event/{{_id}}"><img src="./../images/rufusgira.jpeg" alt=""></a>
+                    <a href="event/{{_id}}"><img src="./../images/rufusgira.jpeg" alt=""></a>
+                    <a href="event/{{_id}}"><img src="./../images/rufusgira.jpeg" alt=""></a>
                 </div>
-                {{/each}}
-
             </div>
-
 
             <h5 class="mt-5 ">Friends - {{user.friends.length}} </h5>
             <hr>

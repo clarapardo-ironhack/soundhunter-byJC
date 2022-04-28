@@ -33,7 +33,7 @@ router.post('/add-new', fileUploader.single('image'), (req, res, next) => {
 
 
 // ----------> EVENT READING <----------
-router.get('/:id', isLoggedIn, (req, res, next) => {
+router.get('/:id',  (req, res, next) => {
     const { id } = req.params
 
     Event

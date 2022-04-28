@@ -1,10 +1,4 @@
-<style>
-    #eventMap {
-        height: 400px;
-        background-color: grey;
-    }
-</style>
-
+<link rel="stylesheet" href="/stylesheets/event.css">
 
 <div class="center-all event-hero">
     <h2 class="syncopate big-title center-big-title mt-5 pt-5 mb-4" style="font-size: 4em">{{selectedEvent.name}}</h2>
@@ -56,20 +50,23 @@
         <h5 class="mt-4">Collaborating artist</h5>
         <hr>
         <div class="scrolling-wrapper" style="height: 220px; display: flex">
-
+{{!-- 
             {{#each fullArtistsImage}}
-            <div class="card artist-card center-all mx-3 my-2" style="width: 10rem;">
-                {{!-- <div style="background-image: url({{image}}); height: 100px"></div> --}}
-                <img src="{{image}}" class="card-img-top" alt="artist-profilePic" style="height: 120px">
-                <div class="mt-2">
-                    <h5 class="card-title" style="font-size: 0.8em">{{name}}</h5>
+            <div class="carousel-event">
+                <div class="card artist-card center-all mx-3 my-2" style="width: 10rem;">
+                    <img src="{{image}}" class="card-img-top" alt="artist-profilePic" style="height: 120px">
+                    <div class="mt-2">
+                        <h5 class="card-title" style="font-size: 0.8em">{{name}}</h5>
 
-                    <a href="/artist/{{idSpotify}}" class="btn btn-dark" style="font-size: 0.7em">See more</a>
+                        <a href="/artist/{{idSpotify}}" class="btn btn-dark" style="font-size: 0.7em">See more</a>
+                    </div>
                 </div>
-            </div>
-            {{/each}}
 
+                {{/each}}
+
+            </div> --}}
         </div>
+
 
 
         <h5 class="mt-4">Location</h5>
