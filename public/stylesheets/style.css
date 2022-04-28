@@ -298,6 +298,13 @@ input:-webkit-autofill:active {
     font-size: 2.5em;
 }
 
+.signin-artist-text {
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    font-size: 20px;
+}
+
+
 /* TEXT SIGN */
 
 .text-sign {
@@ -319,6 +326,12 @@ input:-webkit-autofill:active {
     white-space: nowrap;
 }
 
+.event-text {
+    font-family: 'Syncopate', sans-serif;
+    color: white;
+    font-size: 30px;
+}
+
 
 /* .scrolling-wrapper-flexbox {
     display: flex;
@@ -330,6 +343,11 @@ input:-webkit-autofill:active {
     background-color: #212529;
     color: #fff;
     border: 2px solid #17C3B2;
+    height: 200px;
+    display: flex;
+    scroll-snap-type: x mandatory;
+    overflow-x: scroll;
+    overflow-y: hidden;
 }
 
 .round-followers {

@@ -20,14 +20,15 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, pariatur. Lorem ipsum dolor sit, amet
                 consectetur adipisicing elit. Reprehenderit, sint. Lorem ipsum dolor sit amet consectetur adipisicing
                 elit. Rem, similique.</p>
-            <a href="/event/add-new"><button>create event</button></a>
-            <a href="/artist/{{artist.[0]._idSpotify}}/edit"><button>edit profile</button></a>
+            <a href="/event/add-new"><button class="user-signin-btn">create event</button></a>
+            <a href="/artist/{{artist.[0]._idSpotify}}/edit"><button class="user-signin-btn">edit profile</button></a>
 
             <br>
 
             {{!-- {{#if isUser}} --}}
             <form action="/artist_/{{artistAux._id}}/follow" method="POST">
-                <input type="text" class="form-control mt-3 form-box" style="display: none" id="id" name="id" value="{{artistAux.idSpotify}}">
+                <input type="text" class="form-control mt-3 form-box" style="display: none" id="id" name="id"
+                    value="{{artistAux.idSpotify}}">
                 <button type="submit" class="user-signin-btn">Follow</button>
             </form>
             {{!-- {{/if}} --}}
