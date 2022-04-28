@@ -4,10 +4,13 @@ const Event = require('../models/Event.model')
 const User = require('../models/User.model')
 const fileUploader = require("./../config/cloudinary.config")
 const { getFullDate, getFullTime } = require("../utils/dateFormatter")
+const { isLoggedIn, checkRole } = require("../middleware/authVerification")
+
+
 
 
 // ----------> EVENT CREATION <----------
-router.get('/add-new', (req, res) => {
+router.get('/add-new', isLoggedIn, (req, res) => {
 
     User
         .find({ role: 'ARTIST' })
@@ -30,7 +33,7 @@ router.post('/add-new', fileUploader.single('image'), (req, res, next) => {
 
 
 // ----------> EVENT READING <----------
-router.get('/:id', (req, res, next) => {
+router.get('/:id', isLoggedIn, (req, res, next) => {
     const { id } = req.params
 
     Event
@@ -57,13 +60,12 @@ router.get('/:id', (req, res, next) => {
                 .catch(err => console.log(err))
         })
         .catch(err => console.log(err))
-
 })
 
 
 
 // ----------> EVENT JOINING <----------
-router.get('/:eventId/join', (req, res, next) => {
+router.get('/:eventId/join', isLoggedIn, (req, res, next) => {
     const myUser = req.session.currentUser
     const userId = req.session.currentUser._id
     const { eventId } = req.params
@@ -93,7 +95,7 @@ router.post('/:eventId/add-comment', (req, res, next) => {
     const { comment } = req.body
 
     Event
-        .findByIdAndUpdate(eventId, { $push: { comments: { user: req.session.currentUser.username, comment } } })
+        .findByIdAndUpdate(eventId, { $push: { comments: { user: req.session.currentUser.username, picture: req.session.currentUser.image, comment } } })
         .then(() => res.redirect('/'))
         .catch(err => next(err))
 })

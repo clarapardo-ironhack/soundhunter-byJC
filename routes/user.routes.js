@@ -3,7 +3,8 @@ const bcrypt = require('bcryptjs')
 const spotifyApi = require('./../config/spotify.config')
 const User = require('./../models/User.model')
 const fileUploader = require("./../config/cloudinary.config")
-const { isLoggedIn, checkRole } = require("../middleware/checkRole")
+const { getFullDate, getFullTime } = require("../utils/dateFormatter")
+const { isLoggedIn, checkRole } = require("../middleware/authVerification")
 
 
 const saltRounds = 10
@@ -66,8 +67,10 @@ router.get("/user/:id", isLoggedIn, (req, res, next) => {
     User
         .findById(id)
         .then(user => {
-            console.log(user)
-            res.render('profile/user-profile', user, isAdmin, isUser)
+
+            const fullDate = getFullDate(user.createdAt)
+
+            res.render('profile/user-profile', { user, fullDate, isAdmin, isUser })
         })
         .catch(err => next(err))
 })
@@ -116,7 +119,7 @@ router.post("/user/:id/delete", (req, res, next) => {
 })
 
 // ----------> USER: choose favorite genres <----------
-router.get("/signin-user/musicGenres", (req, res) => {
+router.get("/signin-user/musicGenres", (req, res, next) => {
 
     spotifyApi
         .getAvailableGenreSeeds()

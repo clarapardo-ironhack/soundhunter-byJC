@@ -1,23 +1,44 @@
-<div class="container box-info-user mt-5">
+<div class="container mt-5">
 
-    <div class="row">
-        <div class="col-md-6">
-            <p><strong>NAME</strong><br>{{name}}</p>
-            <p><strong>USERNAME</strong><br>{{username}}</p><br>
-            <p><strong>FAVORITE GENRES</strong></p>
-            {{#each favoriteGenres}}
-            <span>{{this}} </span>
-            {{/each}}
-            <br><br>
-            <p><strong>CITY</strong><br>{{city}}</p>
-            <p><strong>FRIENDS</strong><br>{{friends}}</p>
-        </div>
-        <div class="col-md-6">
-            <img class="img-profile-user" src="{{image}}" alt="">
-        </div>
-        <a href="/user/{{_id}}/edit"><button>edit profile</button></a>
-        <a href="#"><button>follow</button></a>
+    <div class="row text-sign">
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-8">
+                    <h1><strong>{{user.username}}</strong></h1>
+                    <h6 style="font-style: italic">{{city}}</h6>
+                    <h6 style="fonst-size: 0.6em; font-weight: lighter">Member since {{fullDate}}</h6>
+                    <h6><br>{{user.name}} {{user.lastname}}</h6>
+                    <h6><br>PONER CUALQUIER CHORRADA</h6>
+                </div>
+                <div class="col-md-4 center-all">
+                    <a href="/user/{{_id}}/edit"><button class="user-signin-btn">edit profile</button></a>
+                    <a href="#"><button class="user-signin-btn">follow</button></a>
+                </div>
+            </div>
 
+
+            <h5 class="mt-5">Favourite genres</h5>
+            <hr>
+            <div style="display: flex">
+                {{#each user.favoriteGenres}}
+                <div class="genres-btn">{{this}} </div>
+                {{/each}}
+            </div>
+
+            <h5 class="mt-5">Upcoming events</h5>
+            <hr>
+            <div style="height: 200px; background-color: black"></div>
+
+            <h5 class="mt-5 ">Friends</h5>
+            <hr>
+            <div style="height: 200px; background-color: black"></div>
+
+
+
+        </div>
+        <div class="col-md-4 ml-5 center-horizontally">
+            <img class="img-profile-user" src="{{user.image}}" alt="">
+        </div>
 
     </div>
 

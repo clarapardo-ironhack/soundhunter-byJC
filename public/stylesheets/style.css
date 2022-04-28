@@ -80,12 +80,18 @@ hr {
 
 }
 
+/* OFFCANVAS */
+.form-box-white {
+    border: none;
+    border-radius: 0%;
+    border-bottom: 2px solid #17C3B2;
+}
 
 
 /* USER PROFILE */
-
 .img-profile-user {
     width: 60%;
+    border-radius: 50%;
 }
 
 .box-info-user {
@@ -94,16 +100,13 @@ hr {
     color: white;
     margin: auto;
     font-size: 1.2em;
-
 }
 
 .profilePic-edit {
     width: 50%;
-
 }
 
 .box-info-edit {
-
     width: 80%;
     height: 600px;
     margin: auto;
@@ -111,7 +114,15 @@ hr {
 
 .bi-pencil-fill {
     color: white;
+}
 
+.genres-btn{
+    border: 2px solid #17C3B2;
+    text-align: center;
+    padding: 5px 25px;
+    border-radius: 20px;
+    margin-right: 20px;
+    font-size: 0.8em;
 }
 
 /* ARTIST PROFILE */
@@ -223,6 +234,12 @@ input:-webkit-autofill:active {
     transition: background-color 5000s ease-in-out 0s;
 }
 
+.center-horizontally {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
 /* FAVOURITE GENRES */
 .center-all {
     display: flex;
@@ -271,7 +288,11 @@ input:-webkit-autofill:active {
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
+
 
 /* .scrolling-wrapper-flexbox {
     display: flex;
@@ -282,11 +303,23 @@ input:-webkit-autofill:active {
 .artist-card {
     background-color: #212529;
     color: #fff;
+    border: 2px solid #17C3B2;
 }
 
 .round-followers {
     height: 40px;
     width: 40px;
     border-radius: 50%;
-    border: 1px solid red;
+    border: 1px solid #17C3B2;
 }
+
+.scrolling-wrapper2 {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    /* white-space: nowrap; */
+}
+
+
+/* ############## */
+/* DESINSTALAR EL NODE MODULES */
+/* ############## */
