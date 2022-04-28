@@ -4,17 +4,12 @@
         background-color: grey;
     }
 </style>
-
-
 <div class="center-all event-hero">
     <h2 class="syncopate big-title center-big-title mt-5 pt-5 mb-4" style="font-size: 4em">{{selectedEvent.name}}</h2>
     <a href="/event/{{selectedEvent._id}}/join"><button>JOIN</button></a>
 </div>
-
 <div class="row center-all mt-5" style="color: white">
     <div class="col-md-9">
-
-
         <h5>Description</h5>
         <hr>
         <div class="row">
@@ -39,37 +34,26 @@
                     <h6 class="mt-5"><strong>People joined</strong></h6>
                     <h6>{{selectedEvent.followers.length}}</h6>
                     <div>
-
-                        {{#each selectedEvent.followers}}
-                        <img class="round-followers" src="{{image}}" alt="profile-pic">
-                        {{/each}}
-
+                        {{#each selectedEvent.followers}} <img class="round-followers" src="{{image}}"
+                            alt="profile-pic"> {{/each}}
                     </div>
                 </div>
             </div>
-            <div class="col-md-5">
-                <img src="{{selectedEvent.image}}" alt="eventCartel">
-            </div>
+            <div class="col-md-5"> <img src="{{selectedEvent.image}}" alt="eventCartel"> </div>
         </div>
-
-
         <h5 class="mt-4">Collaborating artist</h5>
         <hr>
-        <div class="scrolling-wrapper" style="height: 220px; display: flex">
 
-            {{#each fullArtistsImage}}
-            <div class="card artist-card center-all mx-3 my-2" style="width: 10rem;">
-                {{!-- <div style="background-image: url({{image}}); height: 100px"></div> --}}
+        <div class="scrolling-wrapper" style="height: 220px; display: flex">
+            {{#each fullArtistsImage}} <div class="card artist-card center-all mx-3 my-2" style="width: 10rem;">
+                {{!--<div style="background-image: url({{image}}); height: 100px"></div> --}}
                 <img src="{{image}}" class="card-img-top" alt="artist-profilePic" style="height: 120px">
                 <div class="mt-2 center-all">
-                    <h5 class="card-title" style="font-size: 0.8em">{{name}}</h5>
-                    <a href="/artist/{{idSpotify}}" class="btn btn-dark" style="font-size: 0.7em">See more</a>
+                    <h5 class="card-title" style="font-size: 0.8em">{{name}}</h5> <a href="/artist/{{idSpotify}}"
+                        class="btn btn-dark" style="font-size: 0.7em">See more</a>
                 </div>
-            </div>
-            {{/each}}
-
+            </div> {{/each}}
         </div>
-
 
         <h5 class="mt-4">Location</h5>
         <hr>
@@ -88,47 +72,32 @@
                 <h6>{{selectedEvent.address.postcode}}</h6>
                 <h6 style="display: none" class="latitude">{{selectedEvent.location.coordinates.[0]}}</h6>
                 <h6 style="display: none" class="longitude">{{selectedEvent.location.coordinates.[1]}}</h6>
-
                 {{!-- RESERVA TU ALOJAMIENTO PARA EL EVENTO --}}
             </div>
         </div>
-
-
         <h5 class="mt-4">People is talking about it</h5>
         <hr>
         <h6>Leave your comment!</h6>
         <div class="row">
             <div class="col-md-4">
                 <form action="{{selectedEvent.id}}/add-comment" method="POST">
-                    <div>
-                        <textarea name="comment" id="comment" cols="40" rows="6"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary user-signin-btn mt-4">Go!</button>
+                    <div> <textarea name="comment" id="comment" cols="40" rows="6"></textarea> </div> <button
+                        type="submit" class="btn btn-primary user-signin-btn mt-4">Go!</button>
                 </form>
             </div>
-
             <div class="col-md-8 scrolling-wrapper2" style="background-color: #212529;">
-
-                {{#each selectedEvent.comments}}
-                <div class="row">
-                    <div class="col-md-3" style="width: 50px; height: 50px">
-                        <img src="{{picture}}" alt="">
-                    </div>
+                {{#each selectedEvent.comments}} <div class="row">
+                    <div class="col-md-3" style="width: 50px; height: 50px"> <img src="{{picture}}" alt=""> </div>
                     <div class="col-md-9">
                         <h6>{{user}}</h6>
                         <p style="font-size: 0.8em; font-weight: lighter; text-align: justify">{{comment}}</p>
                     </div>
                 </div>
-                <hr>
-                {{/each}}
-
+                <hr> {{/each}}
             </div>
         </div>
-
     </div>
 </div>
-
-
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/js/event-map-setup.js"></script>
 <script

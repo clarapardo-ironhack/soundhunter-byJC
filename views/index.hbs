@@ -9,14 +9,9 @@
     <h5>Upcoming Events</h5>
     <br>
     <div class="carousel">
-        <a href="event/{{_id}}"><img src="./../images/manolo_escobar.jpg" alt=""></a>
-        <a href="event/{{_id}}"><img src="./../images/manolo_escobar.jpg" alt=""></a>
-        <a href="event/{{_id}}"><img src="./../images/manolo_escobar.jpg" alt=""></a>
-        <a href="event/{{_id}}"><img src="./../images/manolo_escobar.jpg" alt=""></a>
-        <a href="event/{{_id}}"><img src="./../images/manolo_escobar.jpg" alt=""></a>
-        <a href="event/{{_id}}"><img src="./../images/manolo_escobar.jpg" alt=""></a>
-        <a href="event/{{_id}}"><img src="./../images/manolo_escobar.jpg" alt=""></a>
-        <a href="event/{{_id}}"><img src="./../images/manolo_escobar.jpg" alt=""></a>
-        <a href="event/{{_id}}"><img src="./../images/manolo_escobar.jpg" alt=""></a>
+        {{#each allEvents}}
+        <a href="event/{{_id}}"><img src="{{image}}" alt="event-img"></a>
+
+        {{/each}}
     </div>
 </div>

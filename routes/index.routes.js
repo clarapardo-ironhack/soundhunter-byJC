@@ -1,10 +1,17 @@
 const router = require("express").Router()
 const SpotifyWebApi = require('spotify-web-api-node')
-
+const Event = require('./../models/Event.model')
 
 // HOME PAGE
 router.get("/", (req, res, next) => {
-  res.render("index")
+
+  Event
+    .find()
+    .then(allEvents => {
+      res.render("index", { allEvents })
+    })
+    .catch(err => (err))
+
 })
 
 // AUTH ROUTES: log in - sign in - log out
