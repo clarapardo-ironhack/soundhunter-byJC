@@ -29,6 +29,7 @@
    <link rel="stylesheet" href="/stylesheets/style.css" />
    <link rel="stylesheet" href="/stylesheets/button.css">
    <link rel="stylesheet" href="/stylesheets/card.css">
+   <link rel="stylesheet" href="/stylesheets/community.css">
 
 </head>
 
@@ -43,6 +44,11 @@
          </button>
          <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
             <ul class="navbar-nav pr-5">
+               <li class="nav-item">
+                  <a class="nav-link" href="/community">
+                     <button>Community</button>
+                  </a>
+               </li>
                <li class="nav-item">
                   <a class="nav-link" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop"
                      aria-controls="offcanvasWithBackdrop"><button class="sign-in"> Login</button></a>
@@ -95,7 +101,8 @@
             </div>
             <div class="mb-3">
                {{!-- <label for="pwd" class="form-label">Password</label> --}}
-               <input type="password" class="form-control form-box-white" id="pwd" placeholder="password" name="plainPwd">
+               <input type="password" class="form-control form-box-white" id="pwd" placeholder="password"
+                  name="plainPwd">
             </div>
             <button type="submit" class="btn sign-in mb-5">go</button>
          </form>
