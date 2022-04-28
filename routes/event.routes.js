@@ -10,7 +10,7 @@ const { isLoggedIn, checkRole } = require("../middleware/authVerification")
 
 
 // ----------> EVENT CREATION <----------
-router.get('/add-new', isLoggedIn, (req, res) => {
+router.get('/add-new', isLoggedIn, checkRole('ARTIST', 'ADMIN'), (req, res) => {
 
     User
         .find({ role: 'ARTIST' })

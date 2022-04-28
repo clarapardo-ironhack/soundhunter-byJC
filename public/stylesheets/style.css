@@ -248,6 +248,11 @@ input:-webkit-autofill:active {
     align-items: flex-start;
 }
 
+.center-vertically{
+    display: flex;
+    justify-content: center;
+}
+
 /* FAVOURITE GENRES */
 .center-all {
     display: flex;
@@ -296,9 +301,6 @@ input:-webkit-autofill:active {
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
-    &::-webkit-scrollbar {
-        display: none;
-    }
 }
 
 

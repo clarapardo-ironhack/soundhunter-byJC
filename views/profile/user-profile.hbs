@@ -1,19 +1,36 @@
-<div class="container mt-5">
+<div class="container">
 
-    <div class="row text-sign">
+    <div class="row text-sign mt-5">
+
         <div class="col-md-8">
-            <div class="row">
-                <div class="col-md-8">
-                    <h1><strong>{{user.username}}</strong></h1>
-                    <h6 style="font-style: italic">{{city}}</h6>
-                    <h6 style="fonst-size: 0.6em; font-weight: lighter">Member since {{fullDate}}</h6>
-                    <h6><br>{{user.name}} {{user.lastname}}</h6>
-                    <h6><br>PONER CUALQUIER CHORRADA</h6>
+            <div class="row card center-vertically p-2">
+
+                <div class="card2 col-user-profile">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h1><strong>{{user.username}}</strong></h1>
+                            <h6 style="font-style: italic">{{city}}</h6>
+                            <h6 style="fonst-size: 0.6em; font-weight: lighter">Member since {{fullDate}}</h6>
+                            <h6><br>{{user.name}} {{user.lastname}}</h6>
+                            <h6><br>PONER CUALQUIER CHORRADA</h6>
+                        </div>
+                        <div class="col-md-4 center-all">
+
+                            {{#if isSelfUser}}
+                            <a href="/user/{{user._id}}/edit"><button class="user-signin-btn">edit profile</button></a>
+                            {{/if}}
+
+                            {{#if isNOTSelfUser}}
+                            <form action="/user/{{user._id}}/follow" method="POST">
+                                <input type="text" class="form-control mt-3 form-box" style="display: none" id="id"
+                                     name="id" value="{{user._id}}">
+                                <button type="submit" class="user-signin-btn">Follow</button>
+                            </form>
+                            {{/if}}
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4 center-all">
-                    <a href="/user/{{_id}}/edit"><button class="user-signin-btn">edit profile</button></a>
-                    <a href="#"><button class="user-signin-btn">follow</button></a>
-                </div>
+
             </div>
 
 
@@ -31,7 +48,20 @@
 
             <h5 class="mt-5 ">Friends</h5>
             <hr>
-            <div style="height: 200px; background-color: black"></div>
+            <div style="height: 200px; background-color: black">
+
+                {{#each user.friends}}
+                <div class="card artist-card center-all mx-3 my-2" style="width: 10rem;">
+                    {{!-- <div style="background-image: url({{image}}); height: 100px"></div> --}}
+                    <img src="{{image}}" class="card-img-top" alt="artist-profilePic" style="height: 120px">
+                    <div class="mt-2">
+                        <h5 class="card-title" style="font-size: 0.8em">{{name}}</h5>
+                
+                        <a href="/artist/{{idSpotify}}" class="btn btn-dark" style="font-size: 0.7em">See more</a>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
 
 
 
@@ -40,26 +70,5 @@
             <img class="img-profile-user" src="{{user.image}}" alt="">
         </div>
 
-{{!-- ARREGLAR ESTO -------------------- --}}
-
-    <div class="row card ">
-        <div class="col-md-4 card2 col-user-profile ">
-            <p><strong>NAME</strong><br>{{user.name}}</p>
-            <p><strong>USERNAME</strong><br>{{username}}</p><br>
-            <p><strong>FAVORITE GENRES</strong></p>
-            {{#each favoriteGenres}}
-            <span>{{this}} </span>
-            {{/each}}
-            <br><br>
-            <p><strong>CITY</strong><br>{{city}}</p>
-            <p><strong>FRIENDS</strong><br>{{friends}}</p>
-            <a href="/user/{{_id}}/edit"><button>edit profile</button></a>
-            <a href="#"><button>follow</button></a>
-            <a href="#"><button>events</button></a>
-        </div>
-        <div class="col-md-8">
-            <img class="img-profile-user" src="{{image}}" alt="">
-        </div>
     </div>
-
 </div>
