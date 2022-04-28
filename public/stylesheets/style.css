@@ -1,5 +1,5 @@
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 300;
     background-color: rgb(63, 63, 63);
 }
@@ -85,7 +85,7 @@ hr {
 /* USER PROFILE */
 
 .img-profile-user {
-    width: 60%;
+    margin-left: 100px;
 }
 
 .box-info-user {
@@ -111,6 +111,12 @@ hr {
 
 .bi-pencil-fill {
     color: white;
+
+}
+
+.col-user-profile {
+    padding: 20px;
+
 
 }
 

@@ -1,8 +1,8 @@
 <div class="container box-info-user mt-5">
 
-    <div class="row">
-        <div class="col-md-6">
-            <p><strong>NAME</strong><br>{{name}}</p>
+    <div class="row card ">
+        <div class="col-md-4 card2 col-user-profile ">
+            <p><strong>NAME</strong><br>{{user.name}}</p>
             <p><strong>USERNAME</strong><br>{{username}}</p><br>
             <p><strong>FAVORITE GENRES</strong></p>
             {{#each favoriteGenres}}
@@ -11,14 +11,13 @@
             <br><br>
             <p><strong>CITY</strong><br>{{city}}</p>
             <p><strong>FRIENDS</strong><br>{{friends}}</p>
+            <a href="/user/{{_id}}/edit"><button>edit profile</button></a>
+            <a href="#"><button>follow</button></a>
+            <a href="#"><button>events</button></a>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
             <img class="img-profile-user" src="{{image}}" alt="">
         </div>
-        <a href="/user/{{_id}}/edit"><button>edit profile</button></a>
-        <a href="#"><button>follow</button></a>
-
-
     </div>
 
 </div>

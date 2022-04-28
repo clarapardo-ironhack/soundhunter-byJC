@@ -9,6 +9,19 @@ const { isLoggedIn, checkRole } = require("../middleware/checkRole")
 const saltRounds = 10
 
 // ----------> ARTIST ROUTES <----------
+router.get("/myprofile-artist", (req, res, next) => {
+    const { idSpotify } = req.session.currentUser
+
+    spotifyApi
+        .getArtist(idSpotify)
+        .then(artist => {
+            res.render('profile/artist-profile', artist)
+        })
+        .catch(err => next(err))
+
+})
+
+
 router.get("/artist/:id", (req, res, next) => {
 
     const { id } = req.params
@@ -19,8 +32,7 @@ router.get("/artist/:id", (req, res, next) => {
     // res.render('profile/artist-profile')
     spotifyApi
         .getArtist(id)
-        .then((artist) => {
-            console.log(artist)
+        .then(artist => {
             res.render('profile/artist-profile', artist)
         })
         .catch(err => next(err))
@@ -31,10 +43,10 @@ router.get("/artist/:id/edit", (req, res, next) => {
     // const isAdmin = req.session.currentUser.role === 'ADMIN'
     // const isArtist = req.session.currentUser.role === 'ARTIST'
 
-    const { id } = req.params
+    const { idSpotify } = req.params
 
     User
-        .findByIdAndUpdate(id)
+        .findByIdAndUpdate(idSpotify)
         .then(artist => {
             res.render('profile/artist-edit', artist)
         })
@@ -43,11 +55,11 @@ router.get("/artist/:id/edit", (req, res, next) => {
 
 router.post("/artist/:id/edit", (req, res, next) => {
 
-    const { id } = req.params
+    const { idSpotify } = req.params
     const { name, image } = req.body
 
     User
-        .findByIdAndUpdate(id, { name, image })
+        .findByIdAndUpdate(idSpotify, { name, image })
         .then(artist => {
             res.redirect('/')
         })
@@ -56,6 +68,21 @@ router.post("/artist/:id/edit", (req, res, next) => {
 
 
 // ----------> USER ROUTES <----------
+router.get("/profile", (req, res, next) => {
+
+    const { _id } = req.session.currentUser
+
+    User
+        .findById(_id)
+        .then(user => {
+            console.log(user)
+            res.render('profile/user-profile', user)
+        })
+        .catch(err => next(err))
+
+})
+
+
 router.get("/user/:id", isLoggedIn, (req, res, next) => {
 
     const { id } = req.params
