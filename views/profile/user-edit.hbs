@@ -1,9 +1,5 @@
 <div class="container box-info-edit mt-2">
     <div class="row ">
-        {{!-- <div class="mb-6">
-            <label for="city" class="form-label form-label-white">City</label>
-            <input type="text" class="form-control form-box-border" id="city" name="city" value="{{location}}">
-        </div> --}}
         <div class="mt-5 col-md-6">
             <figure>
                 <img class="profilePic-edit" src="{{image}}" alt="null-profileImg">
@@ -15,7 +11,7 @@
             </figure>
         </div>
         <div class="mt-5 col-md-5">
-            <form action="/user/{{_id}}/edit" method="POST">
+            <form action="/user/{{_id}}/edit" method="POST" enctype="multipart/form-data">
                 <label for="name" class="form-label form-label-white">Name</label>
                 <input type="text" class="form-control form-box-border" id="name" name="name" value="{{name}}">
 
@@ -36,6 +32,9 @@
                         {{/each}}
 
                     </select>
+                    <div class="mb-3">
+                        <input class="form-control" type="file" id="cover" name="image" style="display: none">
+                    </div>
             </form>
             <br><br>
             <button type="submit" class="btn btn-primary user-signin-btn">Save changes</button>

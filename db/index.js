@@ -1,5 +1,6 @@
 const mongoose = require("mongoose")
-const MONGO_URI = process.env.MONGODB_URI || "mongodb://localhost/2-project"
+const UserModel = require("../models/User.model")
+const MONGO_URI = process.env.MONGODB_URI || "mongodb+srv://clarapardo:Hello123@cluster0.sev51.mongodb.net/soundhunter"
 
 mongoose
   .connect(MONGO_URI)
@@ -7,7 +8,9 @@ mongoose
     console.log(
       `Connected to Mongo! Database name: "${x.connections[0].name}"`
     )
+    return UserModel.deleteMany()
   })
+
   .catch((err) => {
     console.error("Error connecting to mongo: ", err)
   })

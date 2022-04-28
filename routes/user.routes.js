@@ -119,13 +119,15 @@ router.get("/user/:id/edit", isLoggedIn, (req, res, next) => {
 })
 
 
-router.post("/user/:id/edit", (req, res, next) => {
+router.post("/user/:id/edit", fileUploader.single('image'), (req, res, next) => {
 
     const { id } = req.params
     const { name, lastname, image, favoriteGenres } = req.body
 
+    const { path } = req.file
+
     User
-        .findByIdAndUpdate(id, { name, lastname, image, favoriteGenres })
+        .findByIdAndUpdate(id, { name, lastname, image: path, favoriteGenres })
         .then(user => {
             res.redirect('/')
         })

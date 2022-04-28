@@ -21,41 +21,6 @@ hr {
     font-family: 'Syncopate', sans-serif;
 }
 
-/* INDEX */
-
-.box-index {
-    font-family: 'Syncopate', 'sans-serif';
-    color: white;
-    font-size: 3em;
-    margin: auto;
-    text-align: center;
-    margin-top: 150px;
-    height: 300px;
-}
-
-.search-index {
-
-    width: 80%;
-    line-height: 400px;
-    height: 400px;
-    margin: auto;
-}
-
-.search-box-index {
-    margin-top: 50px;
-    margin-left: 50px;
-    width: 60%;
-    text-align: center;
-    display: block;
-    position: absolute;
-    z-index: 1000;
-
-}
-
-.search-box-index input {
-    font-family: 'Syncopate';
-}
-
 
 /* NAVBAR */
 
@@ -116,9 +81,10 @@ hr {
 
 .bi-pencil-fill {
     color: white;
+    cursor: pointer;
 }
 
-.genres-btn{
+.genres-btn {
     border: 2px solid #17C3B2;
     text-align: center;
     padding: 5px 25px;
@@ -296,6 +262,7 @@ input:-webkit-autofill:active {
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
+
     &::-webkit-scrollbar {
         display: none;
     }
