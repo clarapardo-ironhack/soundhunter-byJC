@@ -178,7 +178,7 @@ router.post("/signin-user/musicGenres", (req, res, next) => {
 router.post("/user/:friendId/follow", (req, res, next) => {
     const myUser = req.session.currentUser
     const userId = req.session.currentUser._id
-    const {friendId} = req.params
+    const { friendId } = req.params
 
     console.log('-------MI ID-------' + userId)
     console.log('-------EL ID DE MI FRIEND-------' + friendId)
