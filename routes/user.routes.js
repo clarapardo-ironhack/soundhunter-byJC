@@ -30,27 +30,22 @@ router.get("/artist/:id", isLoggedIn, (req, res, next) => {
         .then(artist => {
 
             let idSpoti = artist[0].idSpotify
-            console.log('---------EL ID DE SPOTIFY---------' + idSpoti)
+            // console.log('---------EL ID DE SPOTIFY---------' + idSpoti)
             spotifyApi
                 .getArtist(idSpoti)
                 .then(spotifyArtist => {
-                    console.log('---------EL ARTISTA PROPIO SERÍA---------' + artist[0])
-                    console.log('---------EL ARTISTA DE SPOTIFY---------' + spotifyArtist)
 
                     let artistAux = artist[0]
+                
+                    let isSelfArtist = req.session.currentUser.idSpotify === spotifyArtist.body.id
+                    let isUser = req.session.currentUser.role === 'USER'
 
-                    res.render('profile/artist-profile', { artistAux, spotifyArtist })
+                    res.render('profile/artist-profile', { artistAux, spotifyArtist, isSelfArtist, isUser })
                 })
                 .catch(err => next(err))
 
         })
         .catch(err => next(err))
-    // spotifyApi
-    //     .getArtist(id)
-    //     .then(artist => {
-    //         res.render('profile/artist-profile', artist)
-    //     })
-    //     .catch(err => next(err))
 })
 
 // ----------> ARTIST: follow <----------
@@ -114,15 +109,15 @@ router.get("/profile", isLoggedIn, (req, res, next) => {
 
         const { _id } = req.session.currentUser
         const isSelfUser = req.session.currentUser.role === 'USER'
-    
+
         User
             .findById(_id)
             .populate('friends')
             .populate('savedEvents')
             .then(user => {
-    
+
                 const fullDate = getFullDate(user.createdAt)
-    
+
                 res.render('profile/user-profile', { user, fullDate, isSelfUser })
             })
             .catch(err => next(err))
