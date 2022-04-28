@@ -199,7 +199,7 @@ iframe {
 /* FOOTER */
 footer {
     background-color: #212529;
-    /* width: 100%; */
+    width: 100%;
     color: #17C3B2;
 }
 
@@ -365,7 +365,6 @@ input:-webkit-autofill:active {
     border: 2px solid #17C3B2;
     height: 200px;
     display: flex;
-
 }
 
 .round-followers {

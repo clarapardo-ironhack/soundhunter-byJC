@@ -55,14 +55,11 @@ router.post("/artist_/:artistId/follow", isLoggedIn, (req, res, next) => {
     const { artistId } = req.params
     let { spotifyArtistId } = req.body
 
-    // console.log('----------EL ID DEL URL----------' + spotifyArtistId)
 
     if (!myUser.favouriteArtists.includes(artistId.toString())) {
 
         User.findByIdAndUpdate(userId, { $push: { favouriteArtists: artistId } }, { new: true })
             .then(user => {
-                // console.log(user)
-                // const {idSpotify} = user
                 res.redirect(`/artist/${spotifyArtistId}`)
             })
             .catch(err => next(err))
@@ -237,6 +234,45 @@ router.post("/user/:friendId/follow", isLoggedIn, (req, res, next) => {
         res.redirect(`/user/${friendId}`)
     }
 })
+
+// ----------> COMMUNITY <----------
+
+router.get("/community", isLoggedIn, (req, res, next) => {
+
+    User
+        .find()
+        .then(allUsers => {
+            res.render('user/all-users', { allUsers })
+        })
+        .catch(err => (err))
+
+})
+
+router.post("/community/:friendId/follow", isLoggedIn, (req, res, next) => {
+    const myUser = req.session.currentUser
+    const userId = req.session.currentUser._id
+    const { friendId } = req.params
+
+    if (!myUser.friends.includes(friendId.toString())) {
+
+        const promises = [
+            User.findByIdAndUpdate(userId, { $push: { friends: friendId } }),
+            User.findByIdAndUpdate(friendId, { $push: { friends: userId } })
+        ]
+
+        Promise
+            .all(promises)
+            .then(([updatedSelf, updatedFriend]) => {
+                res.redirect(`/user/${updatedFriend._id}`)
+            })
+            .catch(err => next(err))
+
+    } else {
+        res.redirect(`/user/${friendId}`)
+    }
+})
+
+
 
 
 
