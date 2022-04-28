@@ -52,16 +52,22 @@
                     <img src="{{image}}" class="card-img-top" alt="artist-profilePic" style="height: 150px">
                     <div class="mt-2 center-all">
                         <h6 style="font-size: 0.8em">{{address.city}} {{fullDate}}</h6>
-                
-                        <a href="/artist/{{idSpotify}}" class="event-scroll" style="font-family: syncopate">{{name}}</a>
+
+                        <a href="/event/{{id}}" class="event-scroll" style="font-family: syncopate">{{name}}</a>
                     </div>
                 </div>
                 {{/each}}
 
             </div>
 
-
-            <h5 class="mt-5 ">Friends - {{user.friends.length}} </h5>
+            <div style="display: flex; justify-content: space-between;">
+                <div>
+                    <h5 class="mt-5">Friends</h5>
+                </div>
+                <div>
+                   <h5 class="mt-5 mr-5">{{user.friends.length}}</h5>
+                </div>
+            </div>
             <hr>
             <div style="height: 200px">
 

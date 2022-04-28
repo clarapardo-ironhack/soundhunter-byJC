@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose")
 
 const userSchema = new Schema(
   {
-    username: { type: String, unique: true },
+    username: { type: String },
     password: { type: String, required: true },
     email: { type: String, unique: true, required: true },
     name: String,
@@ -12,6 +12,10 @@ const userSchema = new Schema(
     image: { type: String, default: 'https://www.tech101.in/wp-content/uploads/2018/07/blank-profile-picture.png' },
     role: { type: String, enum: ['USER', 'ARTIST', 'ADMIN'], default: 'USER' },
     friends: [{
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }],
+    favouriteArtists: [{
       type: Schema.Types.ObjectId,
       ref: 'User'
     }],
@@ -29,6 +33,7 @@ const userSchema = new Schema(
     timestamps: true,
   }
 )
+
 
 
 module.exports = model("User", userSchema)

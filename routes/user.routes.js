@@ -27,17 +27,57 @@ router.get("/artist/:id", (req, res, next) => {
 
     const { id } = req.params
 
-    // const isAdmin = req.session.currentUser.role === 'ADMIN'
-    // const isArtist = req.session.currentUser.role === 'ARTIST'
-
-    // res.render('profile/artist-profile')
-    spotifyApi
-        .getArtist(id)
+    User
+        .find({ idSpotify: id })
         .then(artist => {
-            res.render('profile/artist-profile', artist)
+
+            let idSpoti = artist[0].idSpotify
+            console.log('---------EL ID DE SPOTIFY---------' + idSpoti)
+            spotifyApi
+                .getArtist(idSpoti)
+                .then(spotifyArtist => {
+                    console.log('---------EL ARTISTA PROPIO SERÍA---------' + artist[0])
+                    console.log('---------EL ARTISTA DE SPOTIFY---------' + spotifyArtist)
+
+                    let artistAux = artist[0]
+
+                    res.render('profile/artist-profile', { artistAux, spotifyArtist })
+                })
+                .catch(err => next(err))
+
         })
         .catch(err => next(err))
+    // spotifyApi
+    //     .getArtist(id)
+    //     .then(artist => {
+    //         res.render('profile/artist-profile', artist)
+    //     })
+    //     .catch(err => next(err))
 })
+
+// ----------> ARTIST: follow <----------
+router.post("/artist_/:artistId/follow", (req, res, next) => {
+    const myUser = req.session.currentUser
+    const userId = req.session.currentUser._id
+    const { artistId } = req.params
+    const { spotifyArtistId } = req.body
+
+    console.log('----------EL ID DEL URL----------' + artistId)
+
+    if (!myUser.favouriteArtists.includes(artistId.toString())) {
+
+        User.findByIdAndUpdate(userId, { $push: { favouriteArtists: artistId } })
+            .then(user => {
+                res.redirect(`/artist/${spotifyArtistId}`)
+            })
+            .catch(err => next(err))
+
+    } else {
+        res.redirect(`/artist/${spotifyArtistId}`)
+    }
+})
+
+
 
 router.get("/artist/:id/edit", (req, res, next) => {
 
@@ -179,10 +219,6 @@ router.post("/user/:friendId/follow", (req, res, next) => {
     const myUser = req.session.currentUser
     const userId = req.session.currentUser._id
     const { friendId } = req.params
-
-    console.log('-------MI ID-------' + userId)
-    console.log('-------EL ID DE MI FRIEND-------' + friendId)
-
 
     if (!myUser.friends.includes(friendId.toString())) {
 

@@ -3,8 +3,8 @@
 
 
         <div class="col-md-5">
-            <h1>{{body.name}}</h1>
-            <img class="img-profile-artist" src="{{body.images.0.url}}" alt="">
+            <h1>{{spotifyArtist.body.name}}</h1>
+            <img class="img-profile-artist" src="{{spotifyArtist.body.images.0.url}}" alt="">
             {{!-- <iframe src="{{body.external_url.spotify}}" frameborder="0"></iframe> --}}
 
         </div>
@@ -21,9 +21,16 @@
                 consectetur adipisicing elit. Reprehenderit, sint. Lorem ipsum dolor sit amet consectetur adipisicing
                 elit. Rem, similique.</p>
             <a href="/event/add-new"><button>create event</button></a>
-            <a href="/artist/{{_idSpotify}}/edit"><button>edit profile</button></a>
+            <a href="/artist/{{artist.[0]._idSpotify}}/edit"><button>edit profile</button></a>
 
             <br>
+
+            {{!-- {{#if isUser}} --}}
+            <form action="/artist_/{{artistAux._id}}/follow" method="POST">
+                <input type="text" class="form-control mt-3 form-box" style="display: none" id="id" name="id" value="{{artistAux.idSpotify}}">
+                <button type="submit" class="user-signin-btn">Follow</button>
+            </form>
+            {{!-- {{/if}} --}}
         </div>
 
     </div>
