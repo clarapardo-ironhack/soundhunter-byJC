@@ -1,0 +1,55 @@
+body {
+    background-image: url('./../images/concert_.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.index-carousel {
+    width: 80%;
+    margin: auto;
+    height: 250px;
+    background-color: red;
+
+}
+
+.box-index {
+    font-family: 'Syncopate', 'sans-serif';
+    color: white;
+    font-size: 3em;
+    margin: auto;
+    text-align: center;
+    margin-top: 120px;
+    height: 300px;
+}
+
+/* .search-index {
+
+    width: 80%;
+    line-height: 400px;
+    height: 400px;
+    margin: auto;
+}
+
+.search-box-index {
+    margin-top: 50px;
+    margin-left: 50px;
+    width: 60%;
+    text-align: center;
+    display: block;
+    position: absolute;
+    z-index: 1000;
+
+}
+
+.search-box-index input {
+    font-family: 'Syncopate';
+} */
+
+/* BUTTON SLIDER */
+
+button::before {
+    content: '';
+    width: 0;
+    height: 0;
+
+}
