@@ -18,7 +18,6 @@ router.get("/myprofile-artist", isLoggedIn, (req, res, next) => {
             res.render('profile/artist-profile', artist)
         })
         .catch(err => next(err))
-
 })
 
 router.get("/artist/:id", isLoggedIn, (req, res, next) => {
@@ -36,7 +35,7 @@ router.get("/artist/:id", isLoggedIn, (req, res, next) => {
                 .then(spotifyArtist => {
 
                     let artistAux = artist[0]
-                
+
                     let isSelfArtist = req.session.currentUser.idSpotify === spotifyArtist.body.id
                     let isUser = req.session.currentUser.role === 'USER'
 
@@ -172,7 +171,6 @@ router.post("/user/:id/edit", isLoggedIn, fileUploader.single('image'), (req, re
             res.redirect('/')
         })
         .catch(err => next(err))
-
 })
 
 router.post("/user/:id/delete", isLoggedIn, (req, res, next) => {
@@ -186,7 +184,6 @@ router.post("/user/:id/delete", isLoggedIn, (req, res, next) => {
         })
         .catch(err => next(err))
 })
-
 
 // ----------> USER: choose favorite genres <----------
 router.get("/signin-user/musicGenres", isLoggedIn, (req, res, next) => {
@@ -236,47 +233,14 @@ router.post("/user/:friendId/follow", isLoggedIn, (req, res, next) => {
 })
 
 // ----------> COMMUNITY <----------
-
 router.get("/community", isLoggedIn, (req, res, next) => {
 
     User
         .find()
-        .then(allUsers => {
-            res.render('user/all-users', { allUsers })
+        .then(user => {
+            res.render('user/all-users', { user })
         })
         .catch(err => (err))
-
 })
-
-router.post("/community/:friendId/follow", isLoggedIn, (req, res, next) => {
-    const myUser = req.session.currentUser
-    const userId = req.session.currentUser._id
-    const { friendId } = req.params
-
-    if (!myUser.friends.includes(friendId.toString())) {
-
-        const promises = [
-            User.findByIdAndUpdate(userId, { $push: { friends: friendId } }),
-            User.findByIdAndUpdate(friendId, { $push: { friends: userId } })
-        ]
-
-        Promise
-            .all(promises)
-            .then(([updatedSelf, updatedFriend]) => {
-                res.redirect(`/user/${updatedFriend._id}`)
-            })
-            .catch(err => next(err))
-
-    } else {
-        res.redirect(`/user/${friendId}`)
-    }
-})
-
-
-
-
-
-
-
 
 module.exports = router
