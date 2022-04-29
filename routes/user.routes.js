@@ -308,10 +308,14 @@ router.get("/community", isLoggedIn, (req, res, next) => {
 
     User
         .find()
-        .then(user => {
-            res.render('user/all-users', { user })
+        .then(users => {
+            let filteredByUser = users.filter(user => user.role === 'USER')
+
+            res.render('user/all-users', { filteredByUser })
         })
         .catch(err => (err))
 })
+
+
 
 module.exports = router

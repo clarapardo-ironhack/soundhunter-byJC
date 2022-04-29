@@ -1,21 +1,24 @@
 <link rel="stylesheet" href="/stylesheets/community.css">
 
-<div class="row card-rainbow center-vertically box-community mt-5 p-2">
-    <div class="card2 col-user-profile">
-        {{#each user}}
-        <div class="row">
-            <div class="col-md-8">
-                <h1><strong>{{username}}</strong></h1>
+<div class="container">
+    <h4>Community</h4>
+    <hr>
+    <div class="container  box-community mt-5 p-2">
+        {{#each filteredByUser}}
+        <div class="row card-rainbow-community">
+            <div class="card2-community">
+                <div class="col-md-6" style="justify-content: center">
+                    <img class="rounded-circle profile-border" src="{{image}}"
+                        style="width: 150px; height: 150px; padding: 10px; object-fit: cover;" />
+                </div>
+                <div class="col-md-6">
+                    <a class="link-community" href="/user/{{id}}">
+                        <p>{{username}}</p>
+                    </a>
+                </div>
             </div>
-            <div class="col-md-4">
-                <img src="{{image}}" alt="img-profile" class="friends-round">
-                <form action="/community/{{_id}}/follow" method="POST">
-                    <input type="text" class="form-control mt-3 form-box" style="display: none" id="id" name="id"
-                        value="{{_id}}">
-                    <button type="submit" class="user-signin-btn">Follow</button>
-                </form>
-            </div>
-            {{/each}}
         </div>
+        {{/each}}
     </div>
+
 </div>
