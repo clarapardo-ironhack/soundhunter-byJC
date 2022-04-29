@@ -1,22 +1,29 @@
 /* From uiverse.io by @Tiagoadag */
 .card-rainbow-community {
-    height: 450px;
+    height: 200px;
+    width: 17%;
+    margin-left: 40px;
+    margin-bottom: 30px;
     background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
     border-radius: 20px;
     transition: all .3s;
     display: flex;
-} */
+    float: left;
+}
 
 .card2-community {
-    height: 450px;
+    height: 200px;
+    width: 100%;
     background-color: #484848;
     border-radius: 20px;
     transition: all .2s;
     display: flex;
+    flex-direction: column;
+    /* float: left; */
 }
 
 
- .card2-community:hover {
+.card2-community:hover {
     transform: scale(0.98);
     border-radius: 20px;
 }
@@ -34,4 +41,20 @@
 
 .user-signin-btn {
     margin: 20px 0;
-} 
+}
+
+.link-community {
+    display: block;
+    text-decoration: none;
+    color: white;
+    font-size: 1.2em;
+    padding-top: 10px;
+    text-align: center;
+}
+
+h4 {
+    color: white;
+    font-family: 'Syncopate', 'sans-serif';
+    font-size: 2rem;
+    margin-top: 50px;
+}

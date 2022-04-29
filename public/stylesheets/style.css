@@ -51,6 +51,7 @@ hr {
     border-radius: 0%;
     border-bottom: 2px solid #17C3B2;
 }
+
 .center-all-top {
     display: flex;
     flex-direction: column;
@@ -208,6 +209,8 @@ footer {
     background-color: #212529;
     width: 100%;
     color: #17C3B2;
+    clear: both;
+    bottom: 0;
 }
 
 .footer-aboutUs-list {
