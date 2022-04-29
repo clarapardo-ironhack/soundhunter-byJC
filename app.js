@@ -6,7 +6,7 @@ const app = express()
 
 require("./config")(app)
 
-app.locals.appTitle = `PROJECT 2`
+app.locals.appTitle = `SOUNDHUNTER`
 
 require('./config/session.config')(app)
 

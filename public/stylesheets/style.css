@@ -390,6 +390,11 @@ input:-webkit-autofill:active {
     /* white-space: nowrap; */
 }
 
+.login-image {
+    background-image: url('./../images/concert_.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
 /* ############## */
 /* DESINSTALAR EL NODE MODULES */
