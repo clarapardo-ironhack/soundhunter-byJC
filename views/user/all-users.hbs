@@ -1,36 +1,21 @@
 <link rel="stylesheet" href="/stylesheets/community.css">
 
-{{!-- <div class="container box-community mt-5">
-    {{#each allUsers}}
-    <div class="row card-rainbow-community">
-        <div class="col-md-3 card2-community">
-            <p>{{username}}</p>
-
-        </div>
-        {{/each}}
-    </div>
-</div> --}}
-
 <div class="row card-rainbow center-vertically box-community mt-5 p-2">
     <div class="card2 col-user-profile">
+        {{#each user}}
         <div class="row">
             <div class="col-md-8">
-                {{#each allUsers}}
                 <h1><strong>{{username}}</strong></h1>
-                {{/each}}
             </div>
-
             <div class="col-md-4">
-                {{!-- {{#if isNOTSelfUser}} --}}
-                <h6><br>COME ON, FOLLOW ME!</h6>
-                <form action="/community/{{user._id}}/follow" method="POST">
+                <img src="{{image}}" alt="img-profile" class="friends-round">
+                <form action="/community/{{_id}}/follow" method="POST">
                     <input type="text" class="form-control mt-3 form-box" style="display: none" id="id" name="id"
-                        value="{{user._id}}">
+                        value="{{_id}}">
                     <button type="submit" class="user-signin-btn">Follow</button>
                 </form>
-                {{!-- {{/if}} --}}
-
             </div>
+            {{/each}}
         </div>
     </div>
 </div>

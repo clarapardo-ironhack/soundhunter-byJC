@@ -5,7 +5,7 @@
     border-radius: 20px;
     transition: all .3s;
     display: flex;
-}
+} */
 
 .card2-community {
     height: 450px;
@@ -16,7 +16,7 @@
 }
 
 
-.card2-community:hover {
+ .card2-community:hover {
     transform: scale(0.98);
     border-radius: 20px;
 }
@@ -34,14 +34,4 @@
 
 .user-signin-btn {
     margin: 20px 0;
-}
-
-/* .card-user-community {
-    background-color: aquamarine;
-    width: 30%;
-    margin: auto;
-    margin-bottom: 20px;
-    height: 400px;
-    border: 2px solid black;
-    color: black;
-} */
+} 
