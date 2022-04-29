@@ -4,8 +4,8 @@
 
         <div class="col-md-5">
             <h1 class="big-title syncopate">{{spotifyArtist.body.name}}</h1>
-            <h6 class="big-title mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="bi bi-patch-check" viewBox="0 0 16 16">
+            <h6 class="big-title mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    fill="currentColor" class="bi bi-patch-check" viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
                         d="M10.354 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
                     <path
@@ -32,34 +32,37 @@
             </h4>
 
             {{#if isUser}}
-            <form action="/artist_/{{artistAux._id}}/follow" method="POST">
-                <input type="text" class="form-control mt-3 form-box" style="display: none" id="id" name="id"
-                    value="{{artistAux.idSpotify}}">
-                <button type="submit" class="user-signin-btn">Follow</button>
-            </form>
-            {{/if}}
+            <h6{{artistAux.idSpotify}}>
+                </h6>
+                <form action="/artist_/{{artistAux._id}}/follow" method="POST">
+                    <input type="text" class="form-control mt-3 form-box" style="display: none" id="id" name="id"
+                        value="{{artistAux.idSpotify}}">
+                    <button type="submit" class="user-signin-btn">Follow</button>
+                </form>
+                {{/if}}
 
-            {{#if isSelfArtist}}
-            <a href="/event/add-new"><button type="submit" class="user-signin-btn">create a new event</button></a>
-            <a href="/artist/{{artistAux.idSpotify}}/edit"><button type="submit" class="user-signin-btn">edit
-                    profile</button></a>
-            {{/if}}
+                {{#if isSelfArtist}}
+                <a href="/event/add-new"><button type="submit" class="user-signin-btn">create a new event</button></a>
+                <a href="/artist/{{artistAux.idSpotify}}/edit"><button type="submit" class="user-signin-btn">edit
+                        profile</button></a>
+                {{/if}}
 
-            {{#if isAdmin}}
-            <form action="/artist/{{artistAux.idSpotify}}/delete" method="POST">
-                <input type="text" class="form-control mt-3 form-box" style="display: none" id="id" name="id" value="{{artistAux._id}}">
-                <button type="submit" class="user-signin-btn">Delete</button>
-            </form>
+                {{#if isAdmin}}
+                <form action="/artist/{{artistAux.idSpotify}}/delete" method="POST">
+                    <input type="text" class="form-control mt-3 form-box" style="display: none" id="id" name="id"
+                        value="{{artistAux._id}}">
+                    <button type="submit" class="user-signin-btn">Delete</button>
+                </form>
 
-            {{/if}}
+                {{/if}}
 
-            <hr>
-            <h4>Genres</h4>
-            <div style="display: flex">
-                {{#each spotifyArtist.body.genres}}
-                <div class="genres-btn">{{this}} </div>
-                {{/each}}
-            </div>
+                <hr>
+                <h4>Genres</h4>
+                <div class="row" style="display: flex">
+                    {{#each spotifyArtist.body.genres}}
+                    <div class="col-md-2 genres-btn mb-3 center-all">{{this}} </div>
+                    {{/each}}
+                </div>
 
         </div>
 

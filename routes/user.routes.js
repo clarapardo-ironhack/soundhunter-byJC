@@ -37,7 +37,7 @@ router.get("/artist/:id", isLoggedIn, (req, res, next) => {
 
     const { id } = req.params
 
-    
+
     let isAdmin = req.session.currentUser.role === 'ADMIN'
 
     User
@@ -66,19 +66,18 @@ router.post("/artist_/:artistId/follow", isLoggedIn, (req, res, next) => {
     const myUser = req.session.currentUser
     const userId = req.session.currentUser._id
     const { artistId } = req.params
-    let { spotifyArtistId } = req.body
-
+    let { id } = req.body
 
     if (!myUser.favouriteArtists.includes(artistId.toString())) {
 
         User.findByIdAndUpdate(userId, { $push: { favouriteArtists: artistId } }, { new: true })
             .then(user => {
-                res.redirect(`/artist/${spotifyArtistId}`)
+                res.redirect(`/artist/${id}`)
             })
             .catch(err => next(err))
 
     } else {
-        res.redirect(`/artist/${spotifyArtistId}`)
+        res.redirect(`/artist/${id}`)
     }
 })
 
@@ -115,15 +114,15 @@ router.post("/artist/:idSpotify/delete", isLoggedIn, (req, res, next) => {
     const { id } = req.body
 
     let artistToDelete = User
-        .find({idSpotify})
+        .find({ idSpotify })
         .then(artist => {
-            console.log('----EL ID ARTISTA ESSSSSS-----'+ artist[0]._id)
+            console.log('----EL ID ARTISTA ESSSSSS-----' + artist[0]._id)
 
             let idArtist = artist[0]._id
 
             return User.findByIdAndDelete(idArtist)
         })
-        .then(()=>{
+        .then(() => {
             res.redirect('/')
         })
         .catch(err => next(err))
@@ -146,7 +145,7 @@ router.get("/profile", isLoggedIn, (req, res, next) => {
 
         res.redirect('/myprofile-artist')
 
-    } else if (req.session.currentUser.role === 'USER' || req.session.currentUser.role === 'ADMIN' ) {
+    } else if (req.session.currentUser.role === 'USER' || req.session.currentUser.role === 'ADMIN') {
 
         const { _id } = req.session.currentUser
         const isSelfUser = req.session.currentUser.role === 'USER'
@@ -177,7 +176,7 @@ router.get("/user/:id", isLoggedIn, (req, res, next) => {
 
     if (req.session.currentUser._id !== id && req.session.currentUser.role === 'ADMIN') {
 
-    } else if(req.session.currentUser._id !== id) {
+    } else if (req.session.currentUser._id !== id) {
         isNOTSelfUser = true
     }
 
