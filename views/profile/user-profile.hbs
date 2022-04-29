@@ -15,6 +15,7 @@
                             {{#if isSelfUser}}
                             <a href="/user/{{user._id}}/edit"><button class="user-signin-btn">edit profile</button></a>
                             {{/if}}
+
                             {{#if isNOTSelfUser}}
                             <form action="/user/{{user._id}}/follow" method="POST">
                                 <input type="text" class="form-control mt-3 form-box" style="display: none" id="id"
@@ -22,15 +23,24 @@
                                 <button type="submit" class="user-signin-btn">Follow</button>
                             </form>
                             {{/if}}
+
+                            {{#if isAdmin}}
+                            <form action="/user/{{user._id}}/delete" method="POST">
+                                <input type="text" class="form-control mt-3 form-box" style="display: none" id="id"
+                                    name="id" value="{{user._id}}">
+                                <button type="submit" class="user-signin-btn">Delete</button>
+                            </form>
+                            {{/if}}
                         </div>
                     </div>
                 </div>
             </div>
+
             <h5 class="mt-5">Favourite genres</h5>
             <hr>
-            <div style="display: flex">
+            <div class="row" style="display: flex">
                 {{#each user.favoriteGenres}}
-                <div class="genres-btn">{{this}} </div>
+                <div class="col-md-2 genres-btn mb-3 center-all">{{this}} </div>
                 {{/each}}
             </div>
             <h5 class="mt-5">Upcoming events</h5>
@@ -74,10 +84,22 @@
                 {{/each}}
             </div>
         </div>
-        <div class="col-md-4 ml-5 center-horizontally">
+        <div class="col-md-4 ml-5" style="flex-direction: column;">
             {{!-- <img class="img-profile-user" src="{{user.image}}" alt=""> --}}
-            <img class="rounded-circle profile-border" src="{{user.image}}"
-                style="width: 300px; height: 300px; object-fit: cover;" />
+            <div class="center-horizontally">
+                <img class="rounded-circle profile-border" src="{{user.image}}"
+                    style="width: 300px; height: 300px; object-fit: cover;" />
+            </div>
+
+            <h5 class="mt-5">Artists followed</h5>
+            <hr>
+            <div style="width: 300px; text-justify: center">
+
+                {{#each user.favouriteArtists}}
+                <h6 class="mr-5"><a href="/artist/{{idSpotify}}" class="mr-5 big-title"
+                        style="text-decoration: none">{{name}}</a></h6>
+                {{/each}}
+            </div>
         </div>
     </div>
 </div>

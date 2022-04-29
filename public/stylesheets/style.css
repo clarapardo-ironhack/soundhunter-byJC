@@ -51,6 +51,13 @@ hr {
     border-radius: 0%;
     border-bottom: 2px solid #17C3B2;
 }
+.center-all-top {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    color: rgb(63, 63, 63)
+}
 
 
 /* USER PROFILE */

@@ -4,7 +4,7 @@
 
         <div class="col-md-5">
             <h1 class="big-title syncopate">{{spotifyArtist.body.name}}</h1>
-            <h6 class="big-title"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            <h6 class="big-title mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-patch-check" viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
                         d="M10.354 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
@@ -14,25 +14,22 @@
             <img class="img-profile-artist" src="{{spotifyArtist.body.images.0.url}}" alt="">
 
         </div>
-        <div class="col-md-7">
-            <div id="embed-iframe">
+        <div class="col-md-7 pt-5">
+            {{!-- <div id="embed-iframe">
                 <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/{{id}}" width="100%"
                     height="250" frameBorder="0" allowfullscreen=""
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+                </iframe>
+            </div> --}}
 
-            </div>
-
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, pariatur. Lorem ipsum dolor sit, amet
-                consectetur adipisicing elit. Reprehenderit, sint. Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. Rem, similique.
-            </p>
-
-            {{#if isSelfArtist}}
-            <a href="/event/add-new"><button type="submit" class="user-signin-btn">create a new event</button></a>
-            <a href="/artist/{{artist.[0]._idSpotify}}/edit"><button type="submit" class="user-signin-btn">edit
-                    profile</button></a>
-            {{/if}}
-            <br>
+            <h4 class="big-title mt-5"><a class="big-title" style="text-decoration: none"
+                    href="{{spotifyArtist.body.external_urls.spotify}}">See more on Spotify <svg
+                        xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                        class="bi bi-spotify" viewBox="0 0 16 16">
+                        <path
+                            d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.669 11.538a.498.498 0 0 1-.686.165c-1.879-1.147-4.243-1.407-7.028-.77a.499.499 0 0 1-.222-.973c3.048-.696 5.662-.397 7.77.892a.5.5 0 0 1 .166.686zm.979-2.178a.624.624 0 0 1-.858.205c-2.15-1.321-5.428-1.704-7.972-.932a.625.625 0 0 1-.362-1.194c2.905-.881 6.517-.454 8.986 1.063a.624.624 0 0 1 .206.858zm.084-2.268C10.154 5.56 5.9 5.419 3.438 6.166a.748.748 0 1 1-.434-1.432c2.825-.857 7.523-.692 10.492 1.07a.747.747 0 1 1-.764 1.288z" />
+                    </svg></a>
+            </h4>
 
             {{#if isUser}}
             <form action="/artist_/{{artistAux._id}}/follow" method="POST">
@@ -41,6 +38,29 @@
                 <button type="submit" class="user-signin-btn">Follow</button>
             </form>
             {{/if}}
+
+            {{#if isSelfArtist}}
+            <a href="/event/add-new"><button type="submit" class="user-signin-btn">create a new event</button></a>
+            <a href="/artist/{{artistAux.idSpotify}}/edit"><button type="submit" class="user-signin-btn">edit
+                    profile</button></a>
+            {{/if}}
+
+            {{#if isAdmin}}
+            <form action="/artist/{{artistAux.idSpotify}}/delete" method="POST">
+                <input type="text" class="form-control mt-3 form-box" style="display: none" id="id" name="id" value="{{artistAux._id}}">
+                <button type="submit" class="user-signin-btn">Delete</button>
+            </form>
+
+            {{/if}}
+
+            <hr>
+            <h4>Genres</h4>
+            <div style="display: flex">
+                {{#each spotifyArtist.body.genres}}
+                <div class="genres-btn">{{this}} </div>
+                {{/each}}
+            </div>
+
         </div>
 
     </div>

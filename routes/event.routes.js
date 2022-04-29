@@ -97,8 +97,11 @@ router.post('/:eventId/add-comment', isLoggedIn, (req, res, next) => {
     const { comment } = req.body
 
     Event
-        .findByIdAndUpdate(eventId, { $push: { comments: { user: req.session.currentUser.username, picture: req.session.currentUser.image, comment } } })
-        .then(() => res.redirect('/'))
+        .findByIdAndUpdate(eventId, { $push: { comments: { user: req.session.currentUser.username, picture: req.session.currentUser.image, comment } } }, { new: true })
+        .then(event => {
+            let idEvent = event._id
+            res.redirect(`/event/${idEvent}`)
+        })
         .catch(err => next(err))
 })
 

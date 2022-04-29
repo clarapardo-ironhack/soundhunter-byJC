@@ -10,33 +10,18 @@ const saltRounds = 10
 
 // ----------> ARTIST ROUTES <----------
 router.get("/myprofile-artist", isLoggedIn, (req, res, next) => {
-    const { idSpotify } = req.session.currentUser
-
-    spotifyApi
-        .getArtist(idSpotify)
-        .then(artist => {
-            res.render('profile/artist-profile', artist)
-        })
-        .catch(err => next(err))
-
-})
-
-router.get("/artist/:id", isLoggedIn, (req, res, next) => {
-
-    const { id } = req.params
+    const id = req.session.currentUser._id
 
     User
-        .find({ idSpotify: id })
+        .findById(id)
         .then(artist => {
 
-            let idSpoti = artist[0].idSpotify
-            // console.log('---------EL ID DE SPOTIFY---------' + idSpoti)
             spotifyApi
-                .getArtist(idSpoti)
+                .getArtist(artist.idSpotify)
                 .then(spotifyArtist => {
 
-                    let artistAux = artist[0]
-                
+                    let artistAux = artist
+
                     let isSelfArtist = req.session.currentUser.idSpotify === spotifyArtist.body.id
                     let isUser = req.session.currentUser.role === 'USER'
 
@@ -44,6 +29,34 @@ router.get("/artist/:id", isLoggedIn, (req, res, next) => {
                 })
                 .catch(err => next(err))
 
+        })
+        .catch(err => next(err))
+})
+
+router.get("/artist/:id", isLoggedIn, (req, res, next) => {
+
+    const { id } = req.params
+
+    
+    let isAdmin = req.session.currentUser.role === 'ADMIN'
+
+    User
+        .find({ idSpotify: id })
+        .then(artist => {
+
+            let idSpoti = artist[0].idSpotify
+            spotifyApi
+                .getArtist(idSpoti)
+                .then(spotifyArtist => {
+
+                    let artistAux = artist[0]
+
+                    let isSelfArtist = req.session.currentUser.idSpotify === spotifyArtist.body.id
+                    let isUser = req.session.currentUser.role === 'USER'
+
+                    res.render('profile/artist-profile', { artistAux, spotifyArtist, isSelfArtist, isUser, isAdmin })
+                })
+                .catch(err => next(err))
         })
         .catch(err => next(err))
 })
@@ -69,29 +82,60 @@ router.post("/artist_/:artistId/follow", isLoggedIn, (req, res, next) => {
     }
 })
 
-router.get("/artist/:id/edit", isLoggedIn, (req, res, next) => {
+router.get("/artist/:idSpotify/edit", isLoggedIn, (req, res, next) => {
 
     const { idSpotify } = req.params
 
     User
-        .findByIdAndUpdate(idSpotify)
+        .find({ idSpotify })
         .then(artist => {
-            res.render('profile/artist-edit', artist)
+            let ourArtist = artist[0]
+            res.render('profile/artist-edit', ourArtist)
         })
         .catch(err => next(err))
 })
 
-router.post("/artist/:id/edit", isLoggedIn, (req, res, next) => {
+router.post("/artist/:idSpotify/edit", isLoggedIn, (req, res, next) => {
 
     const { idSpotify } = req.params
-    const { name, image } = req.body
+    const { email, id } = req.body
 
     User
-        .findByIdAndUpdate(idSpotify, { name, image })
+        .findByIdAndUpdate(id, { email })
         .then(artist => {
+            let spotifyIdReal = artist.idSpotify
+            res.redirect(`/artist/${spotifyIdReal}`)
+        })
+        .catch(err => next(err))
+})
+
+router.post("/artist/:idSpotify/delete", isLoggedIn, (req, res, next) => {
+
+    const { idSpotify } = req.params
+    const { id } = req.body
+
+    let artistToDelete = User
+        .find({idSpotify})
+        .then(artist => {
+            console.log('----EL ID ARTISTA ESSSSSS-----'+ artist[0]._id)
+
+            let idArtist = artist[0]._id
+
+            return User.findByIdAndDelete(idArtist)
+        })
+        .then(()=>{
             res.redirect('/')
         })
         .catch(err => next(err))
+
+
+    // User
+    //     .findByIdAndDelete(artistToDelete._id)
+    //     .then(()=>{
+    //         res.redirect('/')
+    //     })
+    //     .catch(err => next(err))
+
 })
 
 
@@ -102,7 +146,7 @@ router.get("/profile", isLoggedIn, (req, res, next) => {
 
         res.redirect('/myprofile-artist')
 
-    } else if (req.session.currentUser.role === 'USER') {
+    } else if (req.session.currentUser.role === 'USER' || req.session.currentUser.role === 'ADMIN' ) {
 
         const { _id } = req.session.currentUser
         const isSelfUser = req.session.currentUser.role === 'USER'
@@ -111,6 +155,7 @@ router.get("/profile", isLoggedIn, (req, res, next) => {
             .findById(_id)
             .populate('friends')
             .populate('savedEvents')
+            .populate('favouriteArtists')
             .then(user => {
 
                 const fullDate = getFullDate(user.createdAt)
@@ -127,7 +172,16 @@ router.get("/user/:id", isLoggedIn, (req, res, next) => {
     const { id } = req.params
 
     const isSelfUser = req.session.currentUser._id === id
-    const isNOTSelfUser = req.session.currentUser._id !== id
+    let isNOTSelfUser
+    // const isNOTSelfUser = req.session.currentUser._id !== id
+
+    if (req.session.currentUser._id !== id && req.session.currentUser.role === 'ADMIN') {
+
+    } else if(req.session.currentUser._id !== id) {
+        isNOTSelfUser = true
+    }
+
+    const isAdmin = req.session.currentUser.role === 'ADMIN'
 
     User
         .findById(id)
@@ -137,7 +191,7 @@ router.get("/user/:id", isLoggedIn, (req, res, next) => {
 
             const fullDate = getFullDate(user.createdAt)
 
-            res.render('profile/user-profile', { user, fullDate, isSelfUser, isNOTSelfUser })
+            res.render('profile/user-profile', { user, fullDate, isSelfUser, isNOTSelfUser, isAdmin })
         })
         .catch(err => next(err))
 })
@@ -147,13 +201,16 @@ router.get("/user/:id/edit", isLoggedIn, (req, res, next) => {
 
     const { id } = req.params
 
-    const isAdmin = req.session.currentUser.role === 'ADMIN'
-    const isUser = req.session.currentUser.role === 'USER'
+    spotifyApi
+        .getAvailableGenreSeeds()
+        .then(({ body: { genres } }) => {
 
-    User
-        .findByIdAndUpdate(id)
-        .then(user => {
-            res.render('profile/user-edit', user, isAdmin, isUser)
+            User
+                .findByIdAndUpdate(id)
+                .then(user => {
+                    res.render('profile/user-edit', { user, genres })
+                })
+                .catch(err => next(err))
         })
         .catch(err => next(err))
 })
@@ -163,16 +220,29 @@ router.post("/user/:id/edit", isLoggedIn, fileUploader.single('image'), (req, re
 
     const { id } = req.params
     const { name, lastname, image, favoriteGenres } = req.body
+    let urlImage = ''
 
-    const { path } = req.file
+    if (req.file === undefined) {
 
-    User
-        .findByIdAndUpdate(id, { name, lastname, image: path, favoriteGenres })
-        .then(user => {
-            res.redirect('/')
-        })
-        .catch(err => next(err))
+        User
+            .findByIdAndUpdate(id, { name, lastname, favoriteGenres })
+            .then(user => {
+                res.redirect('/profile')
+            })
+            .catch(err => next(err))
 
+    } else {
+
+        const { path } = req.file
+        urlImage = path
+
+        User
+            .findByIdAndUpdate(id, { name, lastname, image: urlImage, favoriteGenres })
+            .then(user => {
+                res.redirect('/profile')
+            })
+            .catch(err => next(err))
+    }
 })
 
 router.post("/user/:id/delete", isLoggedIn, (req, res, next) => {

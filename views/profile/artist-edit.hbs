@@ -11,35 +11,22 @@
                     </svg></label>
             </figure>
         </div> --}}
+        <h1 class="big-title mt-5 syncopate">{{name}}, edit your contact info</h1>
         <div class="mt-5 col-md-5">
             <form action="/artist/{{_id}}/edit" method="POST">
-                <label for="name" class="form-label form-label-white">Name</label>
-                <input type="text" class="form-control form-box-border" id="name" name="name" value="{{name}}">
-
-                <label for="lastname" class="form-label form-label-white">Last name</label>
-                <input type="text" class="form-control form-box-border" id="lastname" name="lastname"
-                    value="{{lastname}}">
-                <div class="mb-3">
-                    <label for="city" class="form-label form-label-white">City</label>
-                    <input type="text" class="form-control form-box-border" id="city" name="city" value="{{location}}">
-                </div>
-                <div class="mb-3">
-                    <label for="favoriteGenres" class="form-label">Favorite genres</label>
-                    <select class="form-select" name="favoriteGenres" id="favoriteGenres" value="{{favoriteGenres}}"
-                        multiple>
-
-                        {{#each favoriteGenres}}
-                        <option value="{{this}}">{{this}}</option>
-                        {{/each}}
-
-                    </select>
+                <label for="email" class="form-label form-label-white">Email</label>
+                <input type="email" class="form-control form-box" id="email" name="email" placeholder="{{email}}"
+                    value="{{email}}">
+                <input type="text" style="display:none" class="form-control form-box-border" id="id" name="id"
+                    value="{{id}}">
+                <button type="submit" class="btn btn-primary user-signin-btn">Save changes</button>
             </form>
-            <br><br>
 
-            <button type="submit" class="btn btn-primary user-signin-btn">Save changes</button>
-            <form action="/artist/{{_id}}/delete" method="POST"><br><br>
+            <form action="/artist/{{idSpotify}}/delete" method="POST">
                 <button type="submit" class="btn btn-primary user-signin-btn">Delete</button>
             </form>
         </div>
     </div>
+</div>
+</div>
 </div>

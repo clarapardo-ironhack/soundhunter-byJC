@@ -12,6 +12,7 @@ router.get("/login", (req, res) => res.render('/auth/login'))
 router.post("/login", (req, res, next) => {
     const { email, plainPwd } = req.body
 
+
     User
         .findOne({ email })
         .then(user => {
@@ -42,7 +43,7 @@ router.post('/signin-user', fileUploader.single('image'), (req, res, next) => {
     let urlImage = ''
 
     if (req.file === undefined) {
-        urlImage = 'https://www.tech101.in/wp-content/uploads/2018/07/blank-profile-picture.png'
+        urlImage = 'https://res.cloudinary.com/clarapardo/image/upload/v1651207762/gjj3ykaupudnfgogpilg.png'
     } else {
         const { path } = req.file
         urlImage = path
