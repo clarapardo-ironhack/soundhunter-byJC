@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 const User = require("../models/User.model")
 const Event = require("../models/Event.model")
-const MONGO_URI = process.env.MONGODB_URI || "mongodb+srv://clarapardo:Hello123@cluster0.sev51.mongodb.net/soundhunter"
+const MONGO_URI = process.env.MONGODB_URI || "mongodb+srv://clarapardo:Hello123@cluster0.sev51.mongodb.net/soundhunter2"
 
 
 mongoose
