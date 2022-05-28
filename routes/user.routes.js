@@ -70,7 +70,7 @@ router.post("/artist_/:artistId/follow", isLoggedIn, (req, res, next) => {
 
     if (!myUser.favouriteArtists.includes(artistId.toString())) {
 
-        User.findByIdAndUpdate(userId, { $push: { favouriteArtists: artistId } }, { new: true })
+        User.findByIdAndUpdate(userId, { $addToSet: { favouriteArtists: artistId } }, { new: true })
             .then(user => {
                 res.redirect(`/artist/${id}`)
             })
@@ -116,25 +116,13 @@ router.post("/artist/:idSpotify/delete", isLoggedIn, (req, res, next) => {
     let artistToDelete = User
         .find({ idSpotify })
         .then(artist => {
-            console.log('----EL ID ARTISTA ESSSSSS-----' + artist[0]._id)
-
             let idArtist = artist[0]._id
-
             return User.findByIdAndDelete(idArtist)
         })
         .then(() => {
             res.redirect('/')
         })
         .catch(err => next(err))
-
-
-    // User
-    //     .findByIdAndDelete(artistToDelete._id)
-    //     .then(()=>{
-    //         res.redirect('/')
-    //     })
-    //     .catch(err => next(err))
-
 })
 
 
@@ -172,7 +160,6 @@ router.get("/user/:id", isLoggedIn, (req, res, next) => {
 
     const isSelfUser = req.session.currentUser._id === id
     let isNOTSelfUser
-    // const isNOTSelfUser = req.session.currentUser._id !== id
 
     if (req.session.currentUser._id !== id && req.session.currentUser.role === 'ADMIN') {
 

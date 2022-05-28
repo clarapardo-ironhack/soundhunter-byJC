@@ -9,7 +9,6 @@
                             <h6 style="font-style: italic">{{city}}</h6>
                             <h6 style="fonst-size: 0.6em; font-weight: lighter">Member since {{fullDate}}</h6>
                             <h6><br>{{user.name}} {{user.lastname}}</h6>
-                            <h6><br>PONER CUALQUIER CHORRADA</h6>
                         </div>
                         <div class="col-md-4 center-all">
                             {{#if isSelfUser}}
@@ -40,7 +39,7 @@
             <hr>
             <div class="row" style="display: flex">
                 {{#each user.favoriteGenres}}
-                <div class="col-md-2 genres-btn mb-3 center-all">{{this}} </div>
+                <div class="genres-btn mb-3 center-all">{{this}} </div>
                 {{/each}}
             </div>
             <h5 class="mt-5">Upcoming events</h5>
@@ -61,16 +60,17 @@
             </div>
             <div style="display: flex; justify-content: space-between;">
                 <div>
-                    <h5 class="mt-5">Friends</h5>
+                    <h5 class="mt-5">Friends - {{user.friends.length}}</h5>
                 </div>
-                <div>
+                {{!-- <div>
                     <h5 class="mt-5 mr-5">{{user.friends.length}}</h5>
-                </div>
+                </div> --}}
             </div>
             <hr>
-            <div style="height: 200px">
+            <div style="height: 200px; display: flex">
                 {{#each user.friends}}
-                <div class="card center-all mx-3 my-2" style="width: 10rem; background-color: transparent; border: 0px">
+                <div class="card center-all"
+                    style="width: 10rem; background-color: transparent; border: 0px; justify-content:flex-start">
                     <div class="friends-round"
                         style="background-image: url('{{image}}'); background-repeat: no-repeat; background-size: cover;">
                     </div>

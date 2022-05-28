@@ -80,7 +80,6 @@ router.get('/:eventId/join', isLoggedIn, (req, res, next) => {
         Promise
             .all(promises)
             .then(([updatedUser, modifiedEvent]) => {
-                console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@' + modifiedEvent._id)
                 let idEvent = modifiedEvent._id
                 res.redirect(`/event/${idEvent}`)
             })
