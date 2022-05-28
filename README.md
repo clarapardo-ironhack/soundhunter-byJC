@@ -1,4 +1,22 @@
-# project-2
+<img src="https://res.cloudinary.com/clarapardo/image/upload/v1653770111/soundhunter_logo_green_kertqz.png" alt="PANG" width="200px"/>
+
+###### By [Jesús Martín](https://github.com/yimapop) and [Clara Pardo](https://github.com/clarapardo)
+
+#### Want to take a look? [Click here](https://clarapardo-ironhack.github.io/PANG-byHC/)
+
+<br>
+This project was done in just **1 week** as part of our web development Bootcamp assignments at **Ironhack**. 
+*Requirements:* create an app using JavaScript, HTML, Handlebars, and an external API (Spotify & Google Maps). 
+
+
+
+---
+### About SOUNDHUNTER
+
+It's a platform focused on musical events. 
+In it, you will find a community of music lovers, and the latest news about upcoming concerts, which you can follow -as well as their artists-, so you can access them more easily through your own profile saved info, in order not to miss anything.
+Among others, it allows you to follow other users, leave comments on events, save events, explore all types of users (artists & music-lovers), and create events (if you have an artist role).
+
 
 ## AUTH ROUTES
 | METHOD | URL | DESCRIPTION |
