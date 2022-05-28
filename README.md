@@ -17,6 +17,7 @@ This project was done in just **1 week** as part of our web development Bootcamp
 It's a platform focused on musical events. 
 
 In it, you will find a community of music lovers, and the latest news about upcoming concerts, which you can follow -as well as their artists-, so you can access them more easily through your own profile saved info, in order not to miss anything.
+
 Among others, it allows you to follow other users, leave comments on events, save events, explore all types of users (artists & music-lovers), and create events (if you have an artist role).
 
 
@@ -24,7 +25,7 @@ Among others, it allows you to follow other users, leave comments on events, sav
 <br>
 
 ---
-### Routes
+### App routes
 ###### Auth routes
 | METHOD | URL | DESCRIPTION |
 | --- | --- | --- |
