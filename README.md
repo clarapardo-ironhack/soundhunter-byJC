@@ -2,7 +2,7 @@
 
 ###### By [Jesús Martín](https://github.com/yimapop) and [Clara Pardo](https://github.com/clarapardo)
 
-#### Want to take a look? [Click here](https://clarapardo-ironhack.github.io/PANG-byHC/)
+#### Want to take a look? [Click here](https://soundhunter.herokuapp.com/)
 
 <br>
 
